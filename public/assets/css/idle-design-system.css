@@ -1,0 +1,745 @@
+/* ==========================================================================
+   IDLE 2026 DESIGN SYSTEM — Official Stylesheet
+   Based on DESIGN.md Specifications (Retro Arcade Gaming / Light Mode Base)
+   ========================================================================== */
+
+:root {
+    /* === 1.1 Base / Background Colors === */
+    --color-bg-base: #f8f5ff;
+    --color-bg-section-alt: #f0ecf8;
+    --color-bg-card: #ffffff;
+    --color-bg-input: #f5f3ff;
+
+    /* === 1.2 Primary Accent — Cyan (Action) === */
+    --color-cyan-400: #22ddee;
+    --color-cyan-500: #00c8dd;
+    --color-cyan-600: #00a8bb;
+    --color-cyan-glow: rgba(0, 200, 221, 0.4);
+
+    /* === 1.3 Secondary Accent — Magenta (Highlight) === */
+    --color-magenta-400: #ff3fd8;
+    --color-magenta-500: #e800c0;
+    --color-magenta-600: #c200a0;
+    --color-magenta-glow: rgba(232, 0, 192, 0.35);
+
+    /* === 1.4 Neutral / Text Colors === */
+    --color-text-primary: #0f0a1e;
+    --color-text-secondary: #4a3f6b;
+    --color-text-muted: #8a7da8;
+    --color-text-on-dark: #f0eeff;
+    --color-border: #ddd5f0;
+    --color-border-focus: #00c8dd;
+
+    /* === 1.5 Dark Surface Colors === */
+    --color-dark-bg: #0a0714;
+    --color-dark-surface: #150e2a;
+    --color-dark-border: #2a1f4a;
+
+    /* === 1.6 Gradients === */
+    --gradient-neon-primary: linear-gradient(135deg, #00c8dd 0%, #e800c0 100%);
+    --gradient-neon-subtle: linear-gradient(
+        135deg,
+        rgba(34, 221, 238, 0.13) 0%,
+        rgba(255, 63, 216, 0.13) 100%
+    );
+    --gradient-hero-overlay: linear-gradient(
+        180deg,
+        #f8f5ff 0%,
+        #ede8ff 60%,
+        #f8f5ff 100%
+    );
+    --gradient-footer-top: linear-gradient(90deg, #00c8dd 0%, #e800c0 100%);
+    --gradient-card-hover: linear-gradient(
+        135deg,
+        rgba(0, 200, 221, 0.08) 0%,
+        rgba(232, 0, 192, 0.08) 100%
+    );
+
+    /* === 2. Typography Tokens === */
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+
+    /* === 3. Border Radius Tokens === */
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-pill: 9999px;
+    --radius-full: 50%;
+
+    /* === 4. Spacing Tokens === */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+
+    /* === 5. Shadows === */
+    --shadow-xs: 0 1px 3px rgba(15, 10, 30, 0.08);
+    --shadow-sm: 0 2px 8px rgba(15, 10, 30, 0.1);
+    --shadow-md: 0 4px 16px rgba(15, 10, 30, 0.12);
+    --shadow-lg: 0 8px 32px rgba(15, 10, 30, 0.16);
+
+    /* === 5. Neon Glow Shadows === */
+    --glow-cyan: 0 0 12px rgba(0, 200, 221, 0.5), 0 0 32px rgba(0, 200, 221, 0.25);
+    --glow-cyan-strong: 0 0 20px rgba(0, 200, 221, 0.7), 0 0 60px rgba(0, 200, 221, 0.35);
+    --glow-magenta: 0 0 12px rgba(232, 0, 192, 0.5), 0 0 32px rgba(232, 0, 192, 0.25);
+    --glow-magenta-strong: 0 0 20px rgba(232, 0, 192, 0.7), 0 0 60px rgba(232, 0, 192, 0.35);
+    --glow-dual: 0 0 16px rgba(0, 200, 221, 0.4), 0 0 16px rgba(232, 0, 192, 0.4);
+
+    /* === Transitions === */
+    --transition-fast: 150ms ease;
+    --transition-base: 220ms ease;
+    --transition-slow: 350ms ease;
+}
+
+/* ==========================================================================
+   Global Base Overrides for Beranda
+   ========================================================================== */
+body {
+    background-color: var(--color-bg-base) !important;
+    font-family: var(--font-body) !important;
+    color: var(--color-text-primary) !important;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6,
+.font-display {
+    font-family: var(--font-display) !important;
+    letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   Section 6.6: Hero Section (Arcade Synthwave Grid + Neon Highlights)
+   ========================================================================== */
+.section-hero {
+    background: var(--gradient-hero-overlay);
+    position: relative;
+    overflow: hidden;
+    padding-top: 130px;
+    padding-bottom: 70px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+/* Subtle grid/scanline pattern */
+.section-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 200, 221, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 200, 221, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: rgba(0, 200, 221, 0.1);
+    border: 1px solid rgba(0, 200, 221, 0.35);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-cyan-600);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    box-shadow: 0 0 12px rgba(0, 200, 221, 0.15);
+}
+
+.hero-title {
+    font-size: 3.25rem;
+    font-weight: 700;
+    line-height: 1.12;
+    color: var(--color-text-primary);
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.25rem;
+    }
+}
+
+.hero-title-sub {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-top: 10px;
+    letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px) {
+    .hero-title-sub {
+        font-size: 1.2rem;
+        margin-top: 6px;
+    }
+}
+
+.text-neon-cyan {
+    color: var(--color-cyan-600) !important;
+    text-shadow: 0 0 16px rgba(0, 200, 221, 0.4);
+}
+
+.text-neon-magenta {
+    color: var(--color-magenta-500) !important;
+    text-shadow: 0 0 16px rgba(232, 0, 192, 0.4);
+}
+
+.hero-subtitle {
+    font-size: 1.05rem;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    margin-bottom: 30px;
+    max-width: 520px;
+}
+
+/* Clean Minimal "Powered by" */
+.hero-powered-by {
+    margin-bottom: 34px;
+}
+
+.hero-powered-title {
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: 14px;
+}
+
+.hero-powered-logos {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.hero-powered-logos img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+    transition: transform var(--transition-fast);
+}
+
+.hero-powered-logos img:hover {
+    transform: translateY(-3px);
+}
+
+/* Hero Device / Mockup Illustration */
+.hero-mockup-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.hero-glow-backdrop {
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(0, 200, 221, 0.25) 0%, rgba(232, 0, 192, 0.15) 50%, transparent 70%);
+    filter: blur(40px);
+    z-index: -1;
+    animation: neon-pulse-cyan 4s ease-in-out infinite alternate;
+}
+
+.hero-device-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 460px;
+    filter: drop-shadow(0 16px 32px rgba(15, 10, 30, 0.15));
+    transition: transform var(--transition-slow);
+}
+
+.hero-device-img:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+/* ==========================================================================
+   Section 6.2: Buttons
+   ========================================================================== */
+.btn-idle-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--color-cyan-500);
+    color: #0a0714 !important;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--glow-cyan);
+    cursor: pointer;
+    text-decoration: none !important;
+    transition:
+        background var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.btn-idle-primary:hover {
+    background-color: var(--color-cyan-400);
+    box-shadow: var(--glow-cyan-strong);
+    transform: translateY(-2px);
+    color: #0a0714 !important;
+}
+
+.btn-idle-primary:active {
+    background-color: var(--color-cyan-600);
+    transform: translateY(0px);
+    box-shadow: var(--glow-cyan);
+}
+
+.btn-idle-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: var(--color-magenta-500);
+    color: #ffffff !important;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--glow-magenta);
+    cursor: pointer;
+    text-decoration: none !important;
+    transition:
+        background var(--transition-fast),
+        box-shadow var(--transition-fast),
+        transform var(--transition-fast);
+}
+
+.btn-idle-secondary:hover {
+    box-shadow: var(--glow-magenta-strong);
+    transform: translateY(-2px);
+    color: #ffffff !important;
+}
+
+.btn-idle-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--color-cyan-600) !important;
+    border: 2px solid var(--color-cyan-500);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-weight: 600;
+    padding: 10px 24px;
+    text-decoration: none !important;
+    transition: all var(--transition-fast);
+}
+
+.btn-idle-outline:hover {
+    background: var(--color-cyan-500);
+    color: #0a0714 !important;
+    box-shadow: var(--glow-cyan);
+    transform: translateY(-2px);
+}
+
+/* Pulse Animation for Primary CTA */
+@keyframes neon-pulse-cyan {
+    0%, 100% {
+        box-shadow: var(--glow-cyan);
+    }
+    50% {
+        box-shadow: var(--glow-cyan-strong);
+    }
+}
+
+.btn-idle-primary.pulse {
+    animation: neon-pulse-cyan 2.5s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Section 6.3: Cards
+   ========================================================================== */
+
+/* Card Kompetisi (Retro Pixel Corner Brackets + Hover Glow) */
+.card-kompetisi {
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition:
+        transform var(--transition-base),
+        box-shadow var(--transition-base),
+        border-color var(--transition-base),
+        background var(--transition-base);
+    position: relative;
+    text-decoration: none !important;
+}
+
+/* Retro pixel corner decorations */
+.card-kompetisi::before,
+.card-kompetisi::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--color-cyan-500);
+    border-style: solid;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: 3;
+}
+
+.card-kompetisi::before {
+    top: 6px;
+    left: 6px;
+    border-width: 2.5px 0 0 2.5px;
+}
+
+.card-kompetisi::after {
+    bottom: 6px;
+    right: 6px;
+    border-width: 0 2.5px 2.5px 0;
+}
+
+.card-kompetisi:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-cyan-500);
+    box-shadow: var(--shadow-md), var(--glow-cyan);
+    background: var(--gradient-card-hover);
+}
+
+.card-kompetisi:hover::before,
+.card-kompetisi:hover::after {
+    opacity: 1;
+}
+
+.card-kompetisi-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background-color: #ede8ff;
+    transition: transform var(--transition-slow);
+}
+
+.card-kompetisi:hover .card-kompetisi-img {
+    transform: scale(1.04);
+}
+
+.card-kompetisi-img-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.card-kompetisi-body {
+    padding: 16px 20px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-kompetisi-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 10px;
+    transition: color var(--transition-fast);
+}
+
+.card-kompetisi:hover .card-kompetisi-title {
+    color: var(--color-cyan-600);
+}
+
+.card-kompetisi-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-cyan-600);
+}
+
+/* Card Berita (Clean Text-First Editorial Card) */
+.card-berita {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    border-top: 3px solid transparent;
+    border-image: var(--gradient-neon-primary) 1;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition:
+        transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    position: relative;
+}
+
+.card-berita:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-berita-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card-berita-title {
+    font-size: 1.18rem;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--color-text-primary);
+    margin-bottom: 12px;
+    transition: color var(--transition-fast);
+}
+
+.card-berita:hover .card-berita-title {
+    color: var(--color-cyan-600);
+}
+
+.card-berita-desc {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.card-berita-meta {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-berita-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-cyan-600);
+    text-decoration: none !important;
+    transition: gap var(--transition-fast);
+}
+
+.card-berita:hover .card-berita-link {
+    gap: 10px;
+    color: var(--color-cyan-500);
+}
+
+/* ==========================================================================
+   Section 6.4: Badge / Tag Kategori
+   ========================================================================== */
+.badge-idle {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: var(--radius-xs);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    width: fit-content;
+}
+
+.badge-idle-cyan {
+    background: rgba(0, 200, 221, 0.15);
+    color: var(--color-cyan-600);
+    border: 1px solid rgba(0, 200, 221, 0.4);
+}
+
+.badge-idle-magenta {
+    background: rgba(232, 0, 192, 0.12);
+    color: var(--color-magenta-600);
+    border: 1px solid rgba(232, 0, 192, 0.35);
+    box-shadow: var(--glow-magenta);
+}
+
+/* ==========================================================================
+   Section Headers & Containers
+   ========================================================================== */
+.section-wrapper {
+    padding: 72px 0;
+    position: relative;
+}
+
+.section-wrapper-alt {
+    background-color: var(--color-bg-section-alt);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.section-header-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-cyan-600);
+    margin-bottom: 8px;
+}
+
+.section-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+/* Horizontal Scroll Container for Competitions */
+.competisi-scroll-container {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 12px 6px 24px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+}
+
+.competisi-scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.competisi-scroll-container::-webkit-scrollbar-track {
+    background: var(--color-bg-section-alt);
+    border-radius: var(--radius-pill);
+}
+
+.competisi-scroll-container::-webkit-scrollbar-thumb {
+    background: var(--color-cyan-500);
+    border-radius: var(--radius-pill);
+}
+
+.competisi-scroll-item {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+}
+
+@media (min-width: 1200px) {
+    .competisi-scroll-item {
+        flex: 0 0 300px;
+    }
+}
+
+/* ==========================================================================
+   Events / Partner Showcase Section
+   ========================================================================== */
+.section-partners-arcade {
+    background: var(--color-bg-section-alt);
+    border-top: 1px solid var(--color-border);
+    padding: 40px 0;
+}
+
+.partners-arcade-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
+}
+
+.partner-logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+}
+
+.partner-logo-item img {
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    filter: grayscale(85%) opacity(0.8);
+    transition: all var(--transition-base);
+}
+
+.partner-logo-item:hover img {
+    filter: grayscale(0%) opacity(1) drop-shadow(0 4px 8px rgba(0, 200, 221, 0.3));
+    transform: scale(1.08);
+}
+
+/* ==========================================================================
+   Laravel Pagination Overrides for Retro Neon Style
+   ========================================================================== */
+.idle-pagination-wrapper .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 36px;
+}
+
+.idle-pagination-wrapper .page-item .page-link {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    background-color: var(--color-bg-card);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 8px 16px;
+    transition: all var(--transition-fast);
+}
+
+.idle-pagination-wrapper .page-item.active .page-link {
+    background-color: var(--color-cyan-500);
+    border-color: var(--color-cyan-500);
+    color: #0a0714;
+    box-shadow: var(--glow-cyan);
+}
+
+.idle-pagination-wrapper .page-item .page-link:hover {
+    border-color: var(--color-cyan-500);
+    color: var(--color-cyan-600);
+    transform: translateY(-2px);
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

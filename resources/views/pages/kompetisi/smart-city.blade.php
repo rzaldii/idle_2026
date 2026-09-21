@@ -44,9 +44,9 @@
                    <p class="text-justify">
                      Smart City adalah sebuah konsep mengenai kota cerdas yang dirancang guna membantu berbagai kegiatan masyarakat terutama dalam upaya mengelola sumber daya yang ada dengan efisien serta memberikan kemudahan mengakses informasi kepada masyarakat hingga untuk mengantisipasi kejadian yang tidak terduga. Lomba dalam bidang Smart City mencakup konsep mengenai kota cerdas yang dirancang guna membantu berbagai kegiatan masyarakat terutama dalam upaya mengelola sumber daya yang ada dengan efisien serta memberikan kemudahan mengakses informasi kepada masyarakat hingga untuk mengantisipasi kejadian yang tidak terduga.
                      </p>
-                     <a class="btn btn-success shadow" href="{{ asset('assets/rulebook/isic/'.$kategori->kategori.'.pdf') }}">Rule Book</a>
-                     <a class="btn btn-success shadow" href="{{ asset('assets/template/'.$kategori->kategori.'.docx') }}">Template</a>
-                     <a class="btn btn-success shadow" href="{{ route('kompetisi.peserta', ['kategori' => $kategori->kategori]) }}">Daftar Peserta</a>
+                      <a class="btn btn-success shadow" href="https://drive.google.com/drive/folders/1BbOkJMaZHTNMT_gg5sreGPuIAucoLL8k?usp=drive_link" target="_blank" rel="noopener noreferrer">Rule Book</a>
+                      <a class="btn btn-success shadow" href="https://docs.google.com/document/d/1oGYlHneLF4kaxm-cH6tkhU3WDfY-SSPaK13DWT4nM4k/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Template</a>
+                      <a class="btn btn-success shadow" href="{{ route('kompetisi.peserta', ['kategori' => $kategori->kategori]) }}">Daftar Peserta</a>
                </div>
            </div>
        </div>
