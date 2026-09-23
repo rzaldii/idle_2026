@@ -743,3 +743,37 @@ h1, h2, h3, h4, h5, h6,
         transition-duration: 0.01ms !important;
     }
 }
+
+/* ==========================================================================
+   Section 6.1 & 6.7: Navbar & Footer
+   ========================================================================== */
+.navbar {
+    background: rgba(248, 245, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(221, 213, 240, 0.5);
+    transition: padding 0.3s ease, background 0.3s ease;
+}
+.navbar.scrolled {
+    background: rgba(248, 245, 255, 0.92);
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.footer-idle {
+    background: var(--color-dark-bg);
+    border-top: 4px solid;
+    border-image: var(--gradient-footer-top) 1;
+    color: var(--color-text-on-dark);
+    padding: 48px 0 24px;
+}
+.footer-idle h3 {
+    color: var(--color-text-on-dark);
+}
+.footer-idle a {
+    color: #8a7da8;
+    transition: color 0.2s ease;
+    text-decoration: none;
+}
+.footer-idle a:hover {
+    color: var(--color-cyan-500);
+}
