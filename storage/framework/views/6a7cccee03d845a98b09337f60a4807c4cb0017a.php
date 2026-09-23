@@ -500,7 +500,7 @@
 
                 <div class="col-lg-5 mt-4 mt-lg-0 text-center cpc-animate-hero-right">
                     <div class="cpc-poster-box mx-auto" style="max-width: 460px;">
-                        <img class="cpc-poster-img" src="<?php echo e(asset('assets/img/kategori/'.$kategori->kategori.'.jpg')); ?>" alt="Poster <?php echo e($kategori->nama_kategori); ?>">
+                        <img class="cpc-poster-img" src="<?php echo e(asset('assets/img/kategori/'.$kategori->kategori.'.png')); ?>" alt="Poster <?php echo e($kategori->nama_kategori); ?>">
                     </div>
                 </div>
             </div>

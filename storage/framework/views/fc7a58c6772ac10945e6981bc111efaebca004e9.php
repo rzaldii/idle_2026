@@ -38,6 +38,7 @@
 
     <!-- Main Stylesheet File -->
     <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/idle-design-system.css')); ?>">
     <style>
       html {
         scroll-behavior: smooth;
