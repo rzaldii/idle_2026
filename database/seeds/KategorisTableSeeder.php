@@ -15,9 +15,8 @@ class KategorisTableSeeder extends Seeder
             [
                 'Himasif' => [
                     ['PPL', 'ppl'],
-                    ['Game', 'game'],
-                    ['Bisnis TIK', 'bisnis-tik'],
-                    ['Smart City', 'smart-city']
+                    ['Smart City', 'smart-city'],
+                    ['Bisnis TIK', 'bisnis-tik']
                 ],
 
                 'Himatif' => [
