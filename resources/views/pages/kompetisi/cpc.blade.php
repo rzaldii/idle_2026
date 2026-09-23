@@ -254,8 +254,8 @@
         background: #FAF9FF;
         border: 1px solid #ECE7FA;
         border-radius: var(--radius-md, 12px);
-        padding: 18px 20px;
-        margin-bottom: 18px;
+        padding: 20px 22px;
+        margin-bottom: 20px;
         transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
     }
 
@@ -266,44 +266,131 @@
         box-shadow: 0 3px 12px rgba(15, 10, 30, 0.05);
     }
 
+    .cpc-member-card-secondary {
+        border-style: dashed;
+        background: #FCFBFF;
+    }
+
     .cpc-member-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 14px;
-        padding-bottom: 10px;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
         border-bottom: 1px solid #EBE5F7;
     }
 
     .cpc-member-title {
         font-family: var(--font-display, 'Space Grotesk', sans-serif);
-        font-size: 0.95rem;
+        font-size: 0.98rem;
         font-weight: 700;
         color: var(--color-text-primary, #0F0A1E);
-        display: flex;
-        align-items: center;
-        gap: 8px;
         margin: 0;
     }
 
-    .cpc-tag-required {
-        font-size: 0.72rem;
-        font-weight: 700;
-        padding: 2px 8px;
-        border-radius: 4px;
-        background: rgba(0, 200, 221, 0.15);
-        color: var(--color-cyan-600, #00A8BB);
-        letter-spacing: 0.04em;
+    .cpc-member-subtitle {
+        display: block;
+        font-size: 0.78rem;
+        color: var(--color-text-muted, #8A7DA8);
+        font-weight: 400;
+        margin-top: 2px;
     }
 
-    .cpc-tag-optional {
-        font-size: 0.72rem;
+    /* Add Member Trigger (Modern Human-Designed UI Pattern) */
+    .cpc-add-member-trigger {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 16px 20px;
+        border: 1.5px dashed var(--color-border, #DDD5F0);
+        border-radius: var(--radius-md, 12px);
+        background: #FAF9FF;
+        cursor: pointer;
+        margin-bottom: 22px;
+        transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .cpc-add-member-trigger:hover {
+        border-color: var(--color-cyan-500, #00C8DD);
+        background: #FFFFFF;
+        box-shadow: 0 3px 12px rgba(0, 200, 221, 0.12);
+        transform: translateY(-1px);
+    }
+
+    .cpc-add-member-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: rgba(0, 200, 221, 0.12);
+        color: var(--color-cyan-600, #00A8BB);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        flex-shrink: 0;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .cpc-add-member-trigger:hover .cpc-add-member-icon {
+        background: var(--color-cyan-500, #00C8DD);
+        color: #0A0714;
+    }
+
+    .cpc-add-member-info {
+        flex: 1;
+        text-align: left;
+    }
+
+    .cpc-add-member-title {
+        font-family: var(--font-display, 'Space Grotesk', sans-serif);
+        font-size: 0.92rem;
         font-weight: 700;
-        padding: 2px 8px;
-        border-radius: 4px;
-        background: rgba(232, 0, 192, 0.12);
-        color: var(--color-magenta-600, #C200A0);
-        letter-spacing: 0.04em;
+        color: var(--color-text-primary, #0F0A1E);
+    }
+
+    .cpc-add-member-sub {
+        font-size: 0.8rem;
+        color: var(--color-text-muted, #8A7DA8);
+        margin-top: 2px;
+    }
+
+    .cpc-btn-slot-action {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--color-cyan-600, #00A8BB);
+        padding: 6px 14px;
+        border-radius: var(--radius-pill, 9999px);
+        background: rgba(0, 200, 221, 0.1);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+    .cpc-add-member-trigger:hover .cpc-btn-slot-action {
+        background: var(--color-cyan-500, #00C8DD);
+        color: #0A0714;
+    }
+
+    .cpc-btn-remove-slot {
+        background: transparent;
+        border: none;
+        color: var(--color-text-muted, #8A7DA8);
+        font-size: 0.82rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 4px 10px;
+        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .cpc-btn-remove-slot:hover {
+        color: #DC3545;
+        background: rgba(220, 53, 69, 0.08);
     }
 
     .cpc-field {
@@ -384,15 +471,15 @@
                         <a href="{{ asset('assets/rulebook/'.$kategori->kategori.'.pdf') }}" target="_blank" class="btn-idle-secondary">
                             <i class="fa fa-file-pdf-o" style="margin-right: 8px;"></i> Unduh Rule Book
                         </a>
-                        <a href="{{ route('kompetisi.peserta', ['kategori' => $kategori->kategori]) }}" class="btn-idle-outline">
-                            <i class="fa fa-users" style="margin-right: 8px;"></i> Lihat Peserta
+                        <a href="{{ route('kompetisi.peserta', ['kategori' => $kategori->kategori]) }}" class="btn-idle-outline" title="Klik untuk melihat daftar tim">
+                            <i class="fa fa-users" style="margin-right: 8px;"></i> {{ $kategori->tims()->count() }} Tim Terdaftar
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-5 mt-4 mt-lg-0 text-center cpc-animate-hero-right">
                     <div class="cpc-poster-box mx-auto" style="max-width: 460px;">
-                        <img class="cpc-poster-img" src="{{ asset('assets/img/kategori/'.$kategori->kategori.'.jpg') }}" alt="Poster {{ $kategori->nama_kategori }}">
+                        <img class="cpc-poster-img" src="{{ asset('assets/img/kategori/cover-cpc.png') }}" alt="Poster {{ $kategori->nama_kategori }}">
                     </div>
                 </div>
             </div>
@@ -403,6 +490,7 @@
         <div class="container">
             <div class="card-kompetisi corner-active p-4 p-md-5 mb-5" data-aos="fade-up" data-aos-duration="850" data-aos-once="true" data-aos-offset="40">
                 <div class="row align-items-center">
+                    <div class="col-12">
                         <h2 class="font-display font-weight-bold mb-3" style="color: var(--color-text-primary); font-size: 1.75rem;">
                             Tentang Competitive Programming Contest
                         </h2>
@@ -411,9 +499,10 @@
                             <strong>Competitive Programming Contest (CPC) IDLE 2026</strong> adalah ajang adu kecakapan menyelesaikan serangkaian persoalan algoritma dan pemecahan masalah (*problem solving*) menggunakan bahasa pemrograman pilihan. Pada cabang lomba ini, solusi tidak memerlukan User Interface (GUI), melainkan program berbasis *Command Line Interface* (CLI) murni yang membaca masukan melalui *standard input* dan mencetak keluaran terstandar.
                         </p>
 
-                        <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify;">
+                        <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify; margin-bottom: 0;">
                             Setiap berkas solusi akan dievaluasi secara otomatis oleh sistem juri dengan batasan waktu komputasi (*time limit*) dan alokasi memori (*memory limit*) yang ketat. Peringkat dinilai berdasarkan banyaknya problem yang terpecahkan dengan benar (*accepted*) serta akumulasi penalti waktu terendah.
                         </p>
+                    </div>
                 </div>
             </div>
 
@@ -424,7 +513,7 @@
                         Formulir Registrasi Tim
                     </h2>
                     <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0;">
-                        Lengkapi informasi tim dan data peserta di bawah ini.
+                        Setiap tim terdiri dari 2 hingga 3 mahasiswa aktif UNEJ. Kolom bertanda <span class="text-danger">*</span> wajib diisi.
                     </p>
                 </div>
 
@@ -441,10 +530,10 @@
                     <!-- KETUA TIM -->
                     <div class="cpc-member-card">
                         <div class="cpc-member-header">
-                            <h3 class="cpc-member-title">
-                                Data Ketua Tim
-                            </h3>
-                            <span class="cpc-tag-required">WAJIB</span>
+                            <div>
+                                <h3 class="cpc-member-title">Data Ketua Tim</h3>
+                                <span class="cpc-member-subtitle">Penanggung jawab utama dan kontak tim</span>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 cpc-field">
@@ -469,10 +558,10 @@
                     <!-- ANGGOTA 1 -->
                     <div class="cpc-member-card">
                         <div class="cpc-member-header">
-                            <h3 class="cpc-member-title">
-                                Data Anggota 1
-                            </h3>
-                            <span class="cpc-tag-required">WAJIB</span>
+                            <div>
+                                <h3 class="cpc-member-title">Data Anggota 1</h3>
+                                <span class="cpc-member-subtitle">Anggota tim inti</span>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 cpc-field">
@@ -494,31 +583,54 @@
                         </div>
                     </div>
 
-                    <!-- ANGGOTA 2 (OPSIONAL) -->
-                    <div class="cpc-member-card">
-                        <div class="cpc-member-header">
-                            <h3 class="cpc-member-title">
-                                Data Anggota 2
-                            </h3>
-                            <span class="cpc-tag-optional">OPSIONAL</span>
+                    @php
+                        $hasAnggota3 = old('nama.2') || old('nim.2') || old('email.2') || old('no_hp.2');
+                    @endphp
+
+                    <!-- ANGGOTA 2 (SLOT ANGGOTA KETIGA) -->
+                    <div id="wrapper-anggota-3" style="{{ $hasAnggota3 ? '' : 'display: none;' }}">
+                        <div class="cpc-member-card cpc-member-card-secondary">
+                            <div class="cpc-member-header">
+                                <div>
+                                    <h3 class="cpc-member-title">Data Anggota 2</h3>
+                                    <span class="cpc-member-subtitle">Anggota tambahan untuk tim yang beranggotakan 3 orang</span>
+                                </div>
+                                <button type="button" class="cpc-btn-remove-slot" id="btn-remove-member" title="Batalkan penambahan anggota ketiga">
+                                    <i class="fa fa-times-circle"></i> Batal / Hapus
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 cpc-field">
+                                    <label>Nama Lengkap</label>
+                                    <input type="text" name="nama[]" value="{{ old('nama.2') }}" placeholder="Nama lengkap anggota 2">
+                                </div>
+                                <div class="col-md-6 cpc-field">
+                                    <label>NIM</label>
+                                    <input class="font-mono" type="number" name="nim[]" value="{{ old('nim.2') }}" placeholder="NIM UNEJ">
+                                </div>
+                                <div class="col-md-6 cpc-field mb-md-0">
+                                    <label>Email UNEJ</label>
+                                    <input class="font-mono" type="email" name="email[]" value="{{ old('email.2') }}" placeholder="nim@mail.unej.ac.id">
+                                </div>
+                                <div class="col-md-6 cpc-field mb-0">
+                                    <label>No. WhatsApp</label>
+                                    <input type="text" name="no_hp[]" value="{{ old('no_hp.2') }}" placeholder="08xxxxxxxxxx">
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6 cpc-field">
-                                <label>Nama Lengkap</label>
-                                <input type="text" name="nama[]" value="{{ old('nama.2') }}" placeholder="Kosongkan bila 2 orang">
-                            </div>
-                            <div class="col-md-6 cpc-field">
-                                <label>NIM</label>
-                                <input class="font-mono" type="number" name="nim[]" value="{{ old('nim.2') }}" placeholder="NIM UNEJ">
-                            </div>
-                            <div class="col-md-6 cpc-field mb-md-0">
-                                <label>Email UNEJ</label>
-                                <input class="font-mono" type="email" name="email[]" value="{{ old('email.2') }}" placeholder="nim@mail.unej.ac.id">
-                            </div>
-                            <div class="col-md-6 cpc-field mb-0">
-                                <label>No. WhatsApp</label>
-                                <input type="text" name="no_hp[]" value="{{ old('no_hp.2') }}" placeholder="08xxxxxxxxxx">
-                            </div>
+                    </div>
+
+                    <!-- TRIGGER TAMBAH ANGGOTA KETIGA -->
+                    <div id="btn-add-member" class="cpc-add-member-trigger" style="{{ $hasAnggota3 ? 'display: none;' : '' }}">
+                        <div class="cpc-add-member-icon">
+                            <i class="fa fa-user-plus"></i>
+                        </div>
+                        <div class="cpc-add-member-info">
+                            <div class="cpc-add-member-title">Punya Anggota ke-3?</div>
+                            <div class="cpc-add-member-sub">Klik di sini jika tim Anda memiliki 3 peserta untuk mengisi data anggota tambahan.</div>
+                        </div>
+                        <div class="cpc-btn-slot-action">
+                            <i class="fa fa-plus"></i> Tambah Anggota
                         </div>
                     </div>
 
@@ -533,5 +645,25 @@
         </div>
     </section>
 </div>
+@endsection
+
+@section('js')
+<script>
+    $(document).ready(function() {
+        $('#btn-add-member').on('click', function() {
+            $(this).slideUp(180, function() {
+                $('#wrapper-anggota-3').slideDown(250);
+                $('#wrapper-anggota-3 input').first().focus();
+            });
+        });
+
+        $('#btn-remove-member').on('click', function() {
+            $('#wrapper-anggota-3').slideUp(200, function() {
+                $('#wrapper-anggota-3 input').val('');
+                $('#btn-add-member').slideDown(200);
+            });
+        });
+    });
+</script>
 @endsection
 

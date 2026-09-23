@@ -1,0 +1,468 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;700&display=swap');
+
+/* ==========================================================================
+   IDLE 2026 DESIGN SYSTEM — MASTER CSS REFERENCE
+   Following DESIGN.md specifications
+   ========================================================================== */
+
+:root {
+    /* === COLORS — Background === */
+    --color-bg-base: #F8F5FF;
+    --color-bg-section-alt: #F0ECF8;
+    --color-bg-card: #FFFFFF;
+    --color-bg-input: #F5F3FF;
+
+    /* === COLORS — Cyan (Primary Action) === */
+    --color-cyan-400: #22DDEE;
+    --color-cyan-500: #00C8DD;
+    --color-cyan-600: #00A8BB;
+    --color-cyan-glow: rgba(0, 200, 221, 0.4);
+
+    /* === COLORS — Magenta (Secondary Highlight) === */
+    --color-magenta-400: #FF3FD8;
+    --color-magenta-500: #E800C0;
+    --color-magenta-600: #C200A0;
+    --color-magenta-glow: rgba(232, 0, 192, 0.35);
+
+    /* === COLORS — Text & Border === */
+    --color-text-primary: #0F0A1E;
+    --color-text-secondary: #4A3F6B;
+    --color-text-muted: #8A7DA8;
+    --color-text-on-dark: #F0EEFF;
+    --color-border: #DDD5F0;
+    --color-border-focus: #00C8DD;
+
+    /* === COLORS — Dark Surface (Footer / Accent) === */
+    --color-dark-bg: #0A0714;
+    --color-dark-surface: #150E2A;
+    --color-dark-border: #2A1F4A;
+
+    /* === GRADIENTS === */
+    --gradient-neon-primary: linear-gradient(135deg, #00C8DD 0%, #E800C0 100%);
+    --gradient-neon-subtle: linear-gradient(135deg, rgba(34, 221, 238, 0.13) 0%, rgba(255, 63, 216, 0.13) 100%);
+    --gradient-hero-overlay: linear-gradient(180deg, #F8F5FF 0%, #EDE8FF 60%, #F8F5FF 100%);
+    --gradient-footer-top: linear-gradient(90deg, #00C8DD 0%, #E800C0 100%);
+    --gradient-card-hover: linear-gradient(135deg, rgba(0, 200, 221, 0.08) 0%, rgba(232, 0, 192, 0.08) 100%);
+
+    /* === TYPOGRAPHY === */
+    --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* === BORDER RADIUS === */
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-pill: 9999px;
+    --radius-full: 50%;
+
+    /* === SPACING === */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+
+    /* === SHADOWS === */
+    --shadow-xs: 0 1px 3px rgba(15, 10, 30, 0.08);
+    --shadow-sm: 0 2px 8px rgba(15, 10, 30, 0.1);
+    --shadow-md: 0 4px 16px rgba(15, 10, 30, 0.12);
+    --shadow-lg: 0 8px 32px rgba(15, 10, 30, 0.16);
+
+    /* === NEON GLOWS (SOFT & REFINED) === */
+    --glow-cyan: 0 4px 14px rgba(0, 200, 221, 0.24);
+    --glow-cyan-strong: 0 6px 20px rgba(0, 200, 221, 0.35);
+    --glow-magenta: 0 4px 14px rgba(232, 0, 192, 0.2);
+    --glow-magenta-strong: 0 6px 20px rgba(232, 0, 192, 0.3);
+    --glow-dual: 0 4px 16px rgba(0, 200, 221, 0.16), 0 4px 16px rgba(232, 0, 192, 0.16);
+
+    /* === TRANSITIONS === */
+    --transition-fast: 150ms ease;
+    --transition-base: 220ms ease;
+    --transition-slow: 350ms ease;
+}
+
+/* === TYPOGRAPHY DEFAULTS === */
+.font-display, h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+}
+
+.font-body {
+    font-family: var(--font-body);
+}
+
+.font-mono {
+    font-family: var(--font-mono);
+}
+
+/* === BUTTONS === */
+.btn-idle-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-cyan-500);
+    color: #0A0714 !important;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--glow-cyan);
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: background var(--transition-fast), box-shadow var(--transition-base), transform var(--transition-fast);
+}
+
+.btn-idle-primary:hover {
+    background-color: var(--color-cyan-400);
+    box-shadow: var(--glow-cyan-strong);
+    transform: translateY(-2px);
+    color: #0A0714 !important;
+}
+
+.btn-idle-primary:active {
+    background-color: var(--color-cyan-600);
+    transform: translateY(0px);
+    box-shadow: var(--glow-cyan);
+}
+
+.btn-idle-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-magenta-500);
+    color: #FFFFFF !important;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 12px 28px;
+    border: none;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--glow-magenta);
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: background var(--transition-fast), box-shadow var(--transition-base), transform var(--transition-fast);
+}
+
+.btn-idle-secondary:hover {
+    background-color: var(--color-magenta-400);
+    box-shadow: var(--glow-magenta-strong);
+    transform: translateY(-2px);
+    color: #FFFFFF !important;
+}
+
+.btn-idle-secondary:active {
+    background-color: var(--color-magenta-600);
+    transform: translateY(0px);
+}
+
+.btn-idle-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--color-cyan-600) !important;
+    border: 2px solid var(--color-cyan-500);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 10px 26px;
+    text-decoration: none !important;
+    transition: all var(--transition-base);
+}
+
+.btn-idle-outline:hover {
+    background: var(--color-cyan-500);
+    color: #0A0714 !important;
+    box-shadow: var(--glow-cyan);
+    transform: translateY(-2px);
+}
+
+.btn-idle-outline-magenta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--color-magenta-600) !important;
+    border: 2px solid var(--color-magenta-500);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 10px 26px;
+    text-decoration: none !important;
+    transition: all var(--transition-base);
+}
+
+.btn-idle-outline-magenta:hover {
+    background: var(--color-magenta-500);
+    color: #FFFFFF !important;
+    box-shadow: var(--glow-magenta);
+    transform: translateY(-2px);
+}
+
+/* Pulse animation */
+@keyframes neon-pulse-cyan {
+    0%, 100% { box-shadow: var(--glow-cyan); }
+    50% { box-shadow: var(--glow-cyan-strong); }
+}
+
+@keyframes neon-pulse-magenta {
+    0%, 100% { box-shadow: var(--glow-magenta); }
+    50% { box-shadow: var(--glow-magenta-strong); }
+}
+
+.btn-idle-primary.pulse {
+    animation: neon-pulse-cyan 2.5s ease-in-out infinite;
+}
+
+/* === CARDS === */
+.card-kompetisi {
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base), background var(--transition-base);
+    position: relative;
+}
+
+/* Retro pixel corner decorations */
+.card-kompetisi::before,
+.card-kompetisi::after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: var(--color-cyan-500);
+    border-style: solid;
+    opacity: 0;
+    transition: opacity var(--transition-base);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.card-kompetisi::before {
+    top: 6px;
+    left: 6px;
+    border-width: 2px 0 0 2px;
+}
+
+.card-kompetisi::after {
+    bottom: 6px;
+    right: 6px;
+    border-width: 0 2px 2px 0;
+}
+
+.card-kompetisi:hover {
+    transform: translateY(-6px);
+    border-color: var(--color-cyan-500);
+    box-shadow: var(--shadow-md), var(--glow-cyan);
+    background: var(--gradient-card-hover);
+}
+
+.card-kompetisi:hover::before,
+.card-kompetisi:hover::after {
+    opacity: 1;
+}
+
+/* Always-on corner variant for hero / primary showcase cards */
+.card-kompetisi.corner-active::before,
+.card-kompetisi.corner-active::after {
+    opacity: 1;
+}
+
+/* === BADGES === */
+.badge-idle {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: var(--radius-xs);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.badge-idle-cyan {
+    background: rgba(0, 200, 221, 0.15);
+    color: var(--color-cyan-600);
+    border: 1px solid rgba(0, 200, 221, 0.4);
+}
+
+.badge-idle-magenta {
+    background: rgba(232, 0, 192, 0.12);
+    color: var(--color-magenta-600);
+    border: 1px solid rgba(232, 0, 192, 0.35);
+}
+
+/* === FORMS & INPUTS === */
+.idle-form-group {
+    margin-bottom: var(--space-5);
+}
+
+.idle-label {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-text-primary);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+}
+
+.idle-input {
+    background: var(--color-bg-input);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--color-text-primary);
+    width: 100%;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+}
+
+.idle-input:focus {
+    outline: none;
+    background: #FFFFFF;
+    border-color: var(--color-border-focus);
+    box-shadow: 0 0 0 3px rgba(0, 200, 221, 0.16);
+}
+
+.idle-input::placeholder {
+    color: var(--color-text-muted);
+}
+
+.idle-helper-text {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: 4px;
+    display: block;
+}
+
+/* === SECTION HERO & GRID OVERLAYS === */
+.section-hero {
+    background: var(--gradient-hero-overlay);
+    position: relative;
+    overflow: hidden;
+}
+
+.synthwave-grid {
+    position: relative;
+}
+
+.synthwave-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0, 200, 221, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 200, 221, 0.045) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* Neon Text Helpers (Softened for readability) */
+.text-neon-cyan {
+    color: var(--color-cyan-600);
+    text-shadow: 0 1px 8px rgba(0, 200, 221, 0.22);
+}
+
+.text-neon-magenta {
+    color: var(--color-magenta-600);
+    text-shadow: 0 1px 8px rgba(232, 0, 192, 0.2);
+}
+
+/* Accessible text colors on light backgrounds */
+.text-idle-cyan {
+    color: var(--color-cyan-600);
+}
+
+.text-idle-magenta {
+    color: var(--color-magenta-600);
+}
+
+/* === GLITCH TEXT ANIMATION === */
+@keyframes glitch {
+    0% {
+        clip-path: inset(0 0 98% 0);
+        transform: translate(-3px, 0) skewX(-2deg);
+    }
+    10% {
+        clip-path: inset(40% 0 50% 0);
+        transform: translate(3px, 0) skewX(2deg);
+    }
+    20% {
+        clip-path: inset(80% 0 10% 0);
+        transform: translate(-2px, 0);
+    }
+    30% {
+        clip-path: inset(10% 0 70% 0);
+        transform: translate(2px, 0);
+    }
+    40% {
+        clip-path: inset(60% 0 25% 0);
+        transform: translate(-2px, 0);
+    }
+    100% {
+        clip-path: inset(0 0 98% 0);
+        transform: translate(0);
+    }
+}
+
+.glitch-text {
+    position: relative;
+    display: inline-block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .glitch-text::before,
+    .glitch-text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+    .glitch-text::before {
+        color: var(--color-cyan-500);
+        animation: glitch 4s infinite steps(1) 0.2s;
+        opacity: 0.7;
+    }
+    .glitch-text::after {
+        color: var(--color-magenta-500);
+        animation: glitch 4s infinite steps(1) 0.5s;
+        opacity: 0.7;
+    }
+}
+
+/* Motion accessibility fallback */
+@media (prefers-reduced-motion: reduce) {
+    .btn-idle-primary.pulse,
+    .glitch-text::before,
+    .glitch-text::after {
+        animation: none !important;
+    }
+    .card-kompetisi,
+    .btn-idle-primary,
+    .btn-idle-secondary,
+    .btn-idle-outline {
+        transition: none !important;
+        transform: none !important;
+    }
+}
