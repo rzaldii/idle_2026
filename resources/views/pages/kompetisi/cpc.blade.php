@@ -496,11 +496,11 @@
                         </h2>
 
                         <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify;">
-                            <strong>Competitive Programming Contest (CPC) IDLE 2026</strong> adalah ajang adu kecakapan menyelesaikan serangkaian persoalan algoritma dan pemecahan masalah (*problem solving*) menggunakan bahasa pemrograman pilihan. Pada cabang lomba ini, solusi tidak memerlukan User Interface (GUI), melainkan program berbasis *Command Line Interface* (CLI) murni yang membaca masukan melalui *standard input* dan mencetak keluaran terstandar.
+                            <strong>Competitive Programming Contest (CPC) IDLE 2026</strong> adalah ajang adu kecakapan menyelesaikan serangkaian persoalan algoritma dan pemecahan masalah (problem solving) menggunakan bahasa pemrograman pilihan. Pada cabang lomba ini, solusi tidak memerlukan User Interface (GUI), melainkan program berbasis Command Line Interface (CLI) murni yang membaca masukan melalui standard input dan mencetak keluaran terstandar.
                         </p>
 
                         <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify; margin-bottom: 0;">
-                            Setiap berkas solusi akan dievaluasi secara otomatis oleh sistem juri dengan batasan waktu komputasi (*time limit*) dan alokasi memori (*memory limit*) yang ketat. Peringkat dinilai berdasarkan banyaknya problem yang terpecahkan dengan benar (*accepted*) serta akumulasi penalti waktu terendah.
+                            Setiap berkas solusi akan dievaluasi secara otomatis oleh sistem juri dengan batasan waktu komputasi (time limit) dan alokasi memori (memory limit) yang ketat. Peringkat dinilai berdasarkan banyaknya problem yang terpecahkan dengan benar (accepted) serta akumulasi penalti waktu terendah.
                         </p>
                     </div>
                 </div>

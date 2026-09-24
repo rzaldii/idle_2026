@@ -477,7 +477,7 @@
 
                 <div class="col-lg-5 mt-4 mt-lg-0 text-center cpc-animate-hero-right">
                     <div class="cpc-poster-box mx-auto" style="max-width: 460px;">
-                        <img class="cpc-poster-img" src="<?php echo e(asset('assets/img/kategori/'.$kategori->kategori.'.png')); ?>" alt="Poster <?php echo e($kategori->nama_kategori); ?>">
+                        <img class="cpc-poster-img" src="<?php echo e(asset('assets/img/kategori/'.$kategori->kategori.'.jpg')); ?>" alt="Poster <?php echo e($kategori->nama_kategori); ?>">
                     </div>
                 </div>
             </div>
@@ -494,11 +494,11 @@
                         </h2>
 
                         <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify;">
-                            <strong>Competitive Programming Contest (CPC) IDLE 2026</strong> adalah ajang adu kecakapan menyelesaikan serangkaian persoalan algoritma dan pemecahan masalah (*problem solving*) menggunakan bahasa pemrograman pilihan. Pada cabang lomba ini, solusi tidak memerlukan User Interface (GUI), melainkan program berbasis *Command Line Interface* (CLI) murni yang membaca masukan melalui *standard input* dan mencetak keluaran terstandar.
+                            <strong>Competitive Programming Contest (CPC) IDLE 2026</strong> adalah ajang adu kecakapan menyelesaikan serangkaian persoalan algoritma dan pemecahan masalah (problem solving) menggunakan bahasa pemrograman pilihan. Pada cabang lomba ini, solusi tidak memerlukan User Interface (GUI), melainkan program berbasis Command Line Interface (CLI) murni yang membaca masukan melalui standard input dan mencetak keluaran terstandar.
                         </p>
 
                         <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify; margin-bottom: 0;">
-                            Setiap berkas solusi akan dievaluasi secara otomatis oleh sistem juri dengan batasan waktu komputasi (*time limit*) dan alokasi memori (*memory limit*) yang ketat. Peringkat dinilai berdasarkan banyaknya problem yang terpecahkan dengan benar (*accepted*) serta akumulasi penalti waktu terendah.
+                            Setiap berkas solusi akan dievaluasi secara otomatis oleh sistem juri dengan batasan waktu komputasi (time limit) dan alokasi memori (memory limit) yang ketat. Peringkat dinilai berdasarkan banyaknya problem yang terpecahkan dengan benar (accepted) serta akumulasi penalti waktu terendah.
                         </p>
                     </div>
                 </div>

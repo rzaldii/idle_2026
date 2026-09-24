@@ -486,7 +486,7 @@
                         <a href="#form-pendaftaran" class="btn-idle-primary">
                             <i class="fa fa-edit" style="margin-right: 8px;"></i> Daftar Sekarang
                         </a>
-                        <a href="<?php echo e(asset('assets/rulebook/isic/'.$kategori->kategori.'.pdf')); ?>" target="_blank" class="btn-idle-secondary">
+                        <a href="<?php echo e(asset('assets/rulebook/'.$kategori->kategori.'.pdf')); ?>" target="_blank" class="btn-idle-secondary">
                             <i class="fa fa-file-pdf-o" style="margin-right: 8px;"></i> Unduh Rule Book
                         </a>
                         <a href="<?php echo e(asset('assets/template/'.$kategori->kategori.'.docx')); ?>" target="_blank" class="btn-idle-outline-magenta">
@@ -500,7 +500,7 @@
 
                 <div class="col-lg-5 mt-4 mt-lg-0 text-center cpc-animate-hero-right">
                     <div class="cpc-poster-box mx-auto" style="max-width: 460px;">
-                        <img class="cpc-poster-img" src="<?php echo e(asset('assets/img/kategori/'.$kategori->kategori.'.png')); ?>" alt="Poster <?php echo e($kategori->nama_kategori); ?>">
+                        <img class="cpc-poster-img" src="<?php echo e(asset('assets/img/kategori/'.$kategori->kategori.'.jpg')); ?>" alt="Poster <?php echo e($kategori->nama_kategori); ?>">
                     </div>
                 </div>
             </div>
