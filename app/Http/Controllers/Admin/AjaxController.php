@@ -177,13 +177,30 @@ class AjaxController extends Controller
 
     public function getMahasiswasData()
     {
-        $_angkatan = ['2018', '2019', '2020', '2021', '2022', '2023'];
         $_prodi = ['Sistem Informasi', 'Teknologi Informasi', 'Informatika'];
-
         $mahasiswas = Mahasiswa::get();
+
+        $_angkatan = [];
+        // Ambil semua angkatan yang ada dari data mahasiswa
+        foreach ($mahasiswas as $mahasiswa) {
+            $ang = "20" . substr(($mahasiswa->nim . ''), 0, 2);
+            if (!in_array($ang, $_angkatan)) {
+                $_angkatan[] = $ang;
+            }
+        }
+        
+        // Urutkan angkatan
+        sort($_angkatan);
+        
+        // Fallback jika belum ada data mahasiswa
+        if (empty($_angkatan)) {
+            $_angkatan = ['2024'];
+        }
+
         $data = [];
 
         foreach ($_prodi as $prodi) {
+            $dd = [];
             foreach ($_angkatan as $angkatan) {
                 $dd[$angkatan] = 0;
             }
@@ -191,13 +208,14 @@ class AjaxController extends Controller
         }
 
         foreach ($mahasiswas as $mahasiswa) {
-            $ang = substr(($mahasiswa->nim . ''), 0, 2);
+            $ang = "20" . substr(($mahasiswa->nim . ''), 0, 2);
             $prodi = substr(($mahasiswa->nim . ''), -4, 1);
 
-            $ang = "20" . $ang;
-
             $prodi = $prodi == 1 ? "Sistem Informasi" : ($prodi == 2 ? "Teknologi Informasi" : "Informatika");
-            $data[$prodi][$ang]++;
+            
+            if (isset($data[$prodi][$ang])) {
+                $data[$prodi][$ang]++;
+            }
         }
 
         return ["data" => $data, "angkatan" => $_angkatan, "prodi" => $_prodi];

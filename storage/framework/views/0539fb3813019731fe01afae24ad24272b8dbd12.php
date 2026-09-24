@@ -85,7 +85,7 @@
                             <img src="<?php echo e(asset('assets/img/kategori/'.$kategori->kategori.'.jpg')); ?>" 
                                  alt="<?php echo e($kategori->nama_kategori); ?>" 
                                  class="card-kompetisi-img"
-                                 onerror="this.src='<?php echo e(asset('assets/img/kategori/PPL.jpg')); ?>'">
+                                 onerror="this.onerror=null; this.src='<?php echo e(asset('assets/img/kategori/ppl.jpg')); ?>'">
                         </div>
                         <div class="card-kompetisi-body">
                             <div>
