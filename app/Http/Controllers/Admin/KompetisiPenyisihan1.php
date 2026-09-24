@@ -117,19 +117,22 @@ class KompetisiPenyisihan1 extends Controller
             $mailer = app()->make(\Snowfire\Beautymail\Beautymail::class);
             $kode = $tim->submissionid;
             foreach ($mahasiswas as $mahasiswa) {
-                if ($mahasiswa["nim"] == null) {
+                // Skip jika NIM atau email kosong/null
+                if (empty($mahasiswa["nim"]) || empty($mahasiswa["email"])) {
                     continue;
                 }
-                $email = $mahasiswa["email"];
+                $email = trim($mahasiswa["email"]);
                 $mailer->send('mails.daftar', compact('tim', 'kategori', 'kode'), function ($message) use ($email, $kategori) {
                     $message
-                        ->from('_mainaccount@idlefasilkom.blog')
+                        ->from(config('mail.from.address'), config('mail.from.name'))
                         ->to($email)
                         ->subject('Pendaftaran IDLe');
                 });
+                \Log::info('Email pendaftaran berhasil dikirim ke: ' . $email . ' untuk tim: ' . $tim->nama_tim);
             }
         } catch (\Exception $e) {
-            \Log::error('Gagal kirim email pendaftaran: ' . $e->getMessage());
+            \Log::error('Gagal kirim email pendaftaran untuk tim [' . ($tim->nama_tim ?? '-') . ']: ' . $e->getMessage());
+            \Log::error($e->getTraceAsString());
         }
 
         // TODO : return redirect with success
