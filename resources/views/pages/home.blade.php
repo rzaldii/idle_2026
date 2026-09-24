@@ -87,7 +87,7 @@
                             <img src="{{ asset('assets/img/kategori/'.$kategori->kategori.'.jpg') }}" 
                                  alt="{{ $kategori->nama_kategori }}" 
                                  class="card-kompetisi-img"
-                                 onerror="this.src='{{ asset('assets/img/kategori/PPL.jpg') }}'">
+                                 onerror="this.onerror=null; this.src='{{ asset('assets/img/kategori/ppl.jpg') }}'">
                         </div>
                         <div class="card-kompetisi-body">
                             <div>
