@@ -41,25 +41,27 @@ class HomeController extends Controller
 
     public function ask(Request $request)
     {
-        $no_bits = '6281367919852';     $no_itec = '6281367919852';
-        $no_icom = '6281367919852';     $no_laosarena = '6281367919852';
+        $no_isic = '6289687331240';     // Himasif (ISIC) - Febbyna Jasmine
+        $no_itec = '6287711713783';     // HIMATIF (ITeC) - Richo
+        $no_icom = '6285233116110';     // HMIF (I-COM) - Sefia
+        $no_laos = '6285607914835';     // UKM LAOS (LAOS Arena) - Dina
 
         $URl = "api.whatsapp.com/send?phone=%T%&text=%M%";
 
         $kategori = $request['kategori'];
         $raw_pesan = rawurlencode("Halo... Saya dari tim *".$request['nama_tim']."* Kategori *".$kategori."* ingin bertanya: ".$request['pesan']);
 
-        if($kategori=="PPL" || $kategori=="Bisnis TIK" || $kategori=="Smart City" || $kategori=="PKM-GO" || $kategori=="KTI" )
+        if($kategori=="Software Dev" || $kategori=="Business Dev" || $kategori=="Smart City" || $kategori=="PPL" || $kategori=="Bisnis TIK" || $kategori=="PKM-GO" )
         {
-            $target = $no_bits;
-        }else if($kategori=="UI/UX" || $kategori=="IOT" || $kategori=="Data Mining"){
+            $target = $no_isic;
+        }else if($kategori=="UI/UX" || $kategori=="IoT" || $kategori=="IOT" || $kategori=="Game Dev" || $kategori=="Animasi" || $kategori=="Data Mining"){
             $target = $no_itec;
-        }else if($kategori=="Game" || $kategori=="CPC" || $kategori=="PAP" ){
+        }else if($kategori=="CPC" || $kategori=="KTI" || $kategori=="Game" || $kategori=="PAP" ){
             $target = $no_icom;
         }else if($kategori=="CTF" ){
-            $target = $no_laosarena;
+            $target = $no_laos;
         }else{
-          return redirect()->back()->with('error', 'Gagal dikirim');
+            $target = $no_itec;
         }
 
         $orig = array("%T%", "%M%");
