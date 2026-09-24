@@ -48,7 +48,7 @@ class Mahasiswa extends Model
         $prefix = (int) substr($nim, 0, 4);
 
         // Cek apakah NIM berada di range 2224 - 2524
-        if ($prefix < 2224 || $prefix > 2524) {
+        if ($prefix < 2224 || $prefix > 2724) {
             throw new \Exception('NIM tidak memenuhi syarat pendaftaran.');
         }
 

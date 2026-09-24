@@ -451,7 +451,7 @@
                             </div>
                             <div class="col-md-6 cpc-field">
                                 <label>NIM <span class="text-danger">*</span></label>
-                                <input class="font-mono" type="number" name="nim[]" value="<?php echo e(old('nim.0')); ?>" required placeholder="NIM UNEJ">
+                                <input class="font-mono" type="text" name="nim[]" value="<?php echo e(old('nim.0')); ?>" required placeholder="NIM UNEJ" pattern="[0-9]{12,13}" inputmode="numeric">
                             </div>
                             <div class="col-md-6 cpc-field mb-md-0">
                                 <label>Email UNEJ <span class="text-danger">*</span></label>
@@ -479,7 +479,7 @@
                             </div>
                             <div class="col-md-6 cpc-field">
                                 <label>NIM <span class="text-danger">*</span></label>
-                                <input class="font-mono" type="number" name="nim[]" value="<?php echo e(old('nim.1')); ?>" required placeholder="NIM UNEJ">
+                                <input class="font-mono" type="text" name="nim[]" value="<?php echo e(old('nim.1')); ?>" required placeholder="NIM UNEJ" pattern="[0-9]{12,13}" inputmode="numeric">
                             </div>
                             <div class="col-md-6 cpc-field mb-md-0">
                                 <label>Email UNEJ <span class="text-danger">*</span></label>
@@ -507,7 +507,7 @@
                             </div>
                             <div class="col-md-6 cpc-field">
                                 <label>NIM</label>
-                                <input class="font-mono" type="number" name="nim[]" value="<?php echo e(old('nim.2')); ?>" placeholder="NIM UNEJ">
+                                <input class="font-mono" type="text" name="nim[]" value="<?php echo e(old('nim.2')); ?>" placeholder="NIM UNEJ" pattern="[0-9]{12,13}" inputmode="numeric">
                             </div>
                             <div class="col-md-6 cpc-field mb-md-0">
                                 <label>Email UNEJ</label>

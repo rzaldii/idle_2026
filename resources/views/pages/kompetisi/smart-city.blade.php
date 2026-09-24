@@ -71,7 +71,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                               <label>NIM Ketua</label>
-                              <input class="form-control" type="number" name="nim[]" value="{{ old('nim[0]') }}" required placeholder="NIM Ketua"></div>
+                              <input class="form-control" type="text" name="nim[]" pattern="[0-9]{12,13}" inputmode="numeric" value="{{ old('nim[0]') }}" required placeholder="NIM Ketua"></div>
                         </div>
                     </div>
                     <div class="form-row">
@@ -97,7 +97,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                               <label>NIM Anggota 1</label>
-                              <input class="form-control" type="number" name="nim[]" value="{{ old('nim[1]') }}" required placeholder="NIM Anggota 1"></div>
+                              <input class="form-control" type="text" name="nim[]" pattern="[0-9]{12,13}" inputmode="numeric" value="{{ old('nim[1]') }}" required placeholder="NIM Anggota 1"></div>
                         </div>
                     </div>
                     <div class="form-row">
@@ -123,7 +123,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                               <label>NIM Anggota 2</label>
-                              <input class="form-control" type="number" name="nim[]" value="{{ old('nim[2]') }}" placeholder="NIM Anggota 2"></div>
+                              <input class="form-control" type="text" name="nim[]" pattern="[0-9]{12,13}" inputmode="numeric" value="{{ old('nim[2]') }}" placeholder="NIM Anggota 2"></div>
                         </div>
                     </div>
                     <div class="form-row">
