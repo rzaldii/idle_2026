@@ -1,9 +1,7 @@
-@extends('layouts.base')
+<?php $__env->startSection('title', 'IDLE 2026 — Kompetisi ' . $kategori->nama_kategori); ?>
 
-@section('title', 'IDLE 2026 — Kompetisi ' . $kategori->nama_kategori)
-
-@section('css')
-<link rel="stylesheet" href="{{ asset('assets/css/idle-design-system.css') }}">
+<?php $__env->startSection('css'); ?>
+<link rel="stylesheet" href="<?php echo e(asset('assets/css/idle-design-system.css')); ?>">
 <style>
     /* =========================================================
        Scoped Styling for KTI Page — IDLE 2026 Retro Arcade Theme
@@ -226,7 +224,7 @@
     }
 
     /* Simple & Silky Smooth Entrance Animations — Extended Duration */
-    @keyframes cpcSimpleFadeUp {
+    @keyframes  cpcSimpleFadeUp {
         from {
             opacity: 0;
             transform: translate3d(0, 20px, 0);
@@ -468,9 +466,9 @@
         }
     }
 </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="cpc-page-wrapper">
     <section class="cpc-hero">
         <div class="container position-relative">
@@ -488,69 +486,68 @@
                         <a href="#form-pendaftaran" class="btn-idle-primary">
                             <i class="fa fa-edit" style="margin-right: 8px;"></i> Daftar Sekarang
                         </a>
-                        <a href="{{ asset('assets/rulebook/'.$kategori->kategori.'.pdf') }}" target="_blank" class="btn-idle-secondary">
+                        <a href="<?php echo e(asset('assets/rulebook/'.$kategori->kategori.'.pdf')); ?>" target="_blank" class="btn-idle-secondary">
                             <i class="fa fa-file-pdf-o" style="margin-right: 8px;"></i> Unduh Rule Book
                         </a>
-                        <a href="{{ asset('assets/template/'.$kategori->kategori.'.docx') }}" target="_blank" class="btn-idle-outline-magenta">
+                        <a href="<?php echo e(asset('assets/template/'.$kategori->kategori.'.docx')); ?>" target="_blank" class="btn-idle-outline-magenta">
                             <i class="fa fa-file-word-o" style="margin-right: 8px;"></i> Unduh Template
                         </a>
-                        <a href="{{ route('kompetisi.peserta', ['kategori' => $kategori->kategori]) }}" class="btn-idle-outline" title="Klik untuk melihat daftar tim">
-                            <i class="fa fa-users" style="margin-right: 8px;"></i> {{ $kategori->tims()->count() }} Tim Terdaftar
+                        <a href="<?php echo e(route('kompetisi.peserta', ['kategori' => $kategori->kategori])); ?>" class="btn-idle-outline" title="Klik untuk melihat daftar tim">
+                            <i class="fa fa-users" style="margin-right: 8px;"></i> <?php echo e($kategori->tims()->count()); ?> Tim Terdaftar
                         </a>
                     </div>
                 </div>
 
                 <div class="col-lg-5 mt-4 mt-lg-0 text-center cpc-animate-hero-right">
                     <div class="cpc-poster-box mx-auto" style="max-width: 460px;">
-                        <img class="cpc-poster-img" src="{{ asset('assets/img/kategori/'.$kategori->kategori.'.jpg') }}" alt="Poster {{ $kategori->nama_kategori }}">
+                        <img class="cpc-poster-img" src="<?php echo e(asset('assets/img/kategori/'.$kategori->kategori.'.jpg')); ?>" alt="Poster <?php echo e($kategori->nama_kategori); ?>">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- *****************************************************************************************************************
-       DESCRIPTION
-       ***************************************************************************************************************** -->
-   <div class="card">
-       <div class="card-body">
-           <div class="row">
-               <div class="col-auto col-md-6 align-self-center">
-                  <img class="img-fluid float-right" data-bs-hover-animate="pulse" src="{{asset('assets/img/kategori/'.$kategori->kategori.'.jpg')}}">
-               </div>
-               <div class="col-auto col-md-6">
-                   <p class="text-justify">
-                   Karya Tulis Ilmiah merupakan bidang lomba yang mendorong peserta untuk mengembangkan sebuah karya tulis dalam bentuk penuangan gagasan atau ide kreatif yang bersifat visioner dan implementatif untuk mencari solusi atas permasalahan bangsa yang siap terbit dengan mengikuti kaidah penugasan ilmiah. Diharapkan peserta yang mengikuti bidang lomba ini mampu berinovasi dan menyajikan karya tulis ilmiah yang memberikan solusi dari segi TIK untuk kedaulatan bangsa.<br>
-                     </p>
-                     <a class="btn btn-success shadow" href="{{ asset('assets/rulebook/isic/'.$kategori->kategori.'.pdf') }}">Rule Book</a>
-                     <a class="btn btn-success shadow" href="{{ asset('assets/template/'.$kategori->kategori.'.docx') }}">Template</a>
-                     <a class="btn btn-success shadow" href="{{ route('kompetisi.peserta', ['kategori' => $kategori->kategori]) }}">Daftar Peserta</a>
-               </div>
-           </div>
-       </div>
-        </div>
-       <div data-bs-parallax-bg="true" class="register-img">
-            <form method="post" class="register-form" action="{{ route('kompetisi.store', ['kategori' => $kategori->id]) }}" method="POST">
-               {{-- <h1 class="text-center" style="font-family: Nunito, sans-serif;font-weight: bold;color: rgb(255,255,255);"> Pendaftaran kompetisi {{ $kategori->nama_kategori }} sudah ditutup! <br>
-              Nantikan kami di ISIC tahun depan :)</h1>  --}}
-                @csrf
-                <input type="hidden" value="{{ $kategori->id }}" name="kategori">
-                <h2 class="text-center" style="font-family: Nunito, sans-serif;font-weight: bold;color: rgb(255,255,255);">Pendaftaran</h2>
-                <div class="form-group">
-                  <label>Nama Tim</label>
-                  <input class="form-control" type="text" name="nama_tim" value="{{ old('nama_tim') }}" placeholder="Nama Tim"></div>
-                <div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Nama Ketua</label>
-                              <input class="form-control" type="text" name="nama[]" value="{{ old('nama[0]') }}" required placeholder="Nama Ketua"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>NIM Ketua</label>
-                              <input class="form-control" type="number" name="nim[]" value="{{ old('nim[0]') }}" required placeholder="NIM Ketua"></div>
-                        </div>
+    <section style="padding: 50px 0 30px;">
+        <div class="container">
+            <div class="card-kompetisi corner-active p-4 p-md-5 mb-5" data-aos="fade-up" data-aos-duration="850" data-aos-once="true" data-aos-offset="40">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <h2 class="font-display font-weight-bold mb-3" style="color: var(--color-text-primary); font-size: 1.75rem;">
+                            Tentang Karya Tulis Ilmiah
+                        </h2>
+
+                        <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify;">
+                            <strong>Karya Tulis Ilmiah (KTI) IDLE 2026</strong> adalah bidang lomba yang mendorong peserta untuk mengembangkan sebuah karya tulis dalam bentuk penuangan gagasan atau ide kreatif yang bersifat visioner dan implementatif untuk mencari solusi atas permasalahan bangsa yang siap terbit dengan mengikuti kaidah penugasan ilmiah.
+                        </p>
+
+                        <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify; margin-bottom: 0;">
+                            Diharapkan peserta yang mengikuti bidang lomba ini mampu berinovasi dan menyajikan karya tulis ilmiah yang memberikan solusi konkret dan terobosan dari segi Teknologi Informasi dan Komunikasi (TIK) demi kedaulatan dan kemajuan bangsa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==========================================
+                 FORMULIR PENDAFTARAN TIM (CLEAN & SIMPLE)
+                 ========================================== -->
+            <div id="form-pendaftaran" class="cpc-form-container p-4 p-md-5 mb-5" data-aos="fade-up" data-aos-duration="850" data-aos-once="true" data-aos-offset="40">
+                <div class="text-center mb-4">
+                    <h2 class="font-display font-weight-bold" style="font-size: 1.65rem; color: var(--color-text-primary); margin-bottom: 6px;">
+                        Formulir Registrasi Tim
+                    </h2>
+                    <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0;">
+                        Setiap tim terdiri dari 2 hingga 3 mahasiswa aktif UNEJ. Kolom bertanda <span class="text-danger">*</span> wajib diisi.
+                    </p>
+                </div>
+
+                <form method="POST" action="<?php echo e(route('kompetisi.store', ['kategori' => $kategori->id])); ?>">
+                    <?php echo csrf_field(); ?>
+                    <input type="hidden" value="<?php echo e($kategori->id); ?>" name="kategori">
+
+                    <!-- IDENTITAS TIM -->
+                    <div class="cpc-field mb-4">
+                        <label>Nama Tim <span class="text-danger">*</span></label>
+                        <input type="text" id="nama_tim" name="nama_tim" value="<?php echo e(old('nama_tim')); ?>" required placeholder="Masukkan nama tim">
                     </div>
 
                     <!-- KETUA TIM -->
@@ -564,19 +561,19 @@
                         <div class="row">
                             <div class="col-md-6 cpc-field">
                                 <label>Nama Lengkap <span class="text-danger">*</span></label>
-                                <input type="text" name="nama[]" value="{{ old('nama.0') }}" required placeholder="Nama lengkap">
+                                <input type="text" name="nama[]" value="<?php echo e(old('nama.0')); ?>" required placeholder="Nama lengkap">
                             </div>
                             <div class="col-md-6 cpc-field">
                                 <label>NIM <span class="text-danger">*</span></label>
-                                <input class="font-mono" type="number" name="nim[]" value="{{ old('nim.0') }}" required placeholder="NIM UNEJ">
+                                <input class="font-mono" type="number" name="nim[]" value="<?php echo e(old('nim.0')); ?>" required placeholder="NIM UNEJ">
                             </div>
                             <div class="col-md-6 cpc-field mb-md-0">
                                 <label>Email UNEJ <span class="text-danger">*</span></label>
-                                <input class="font-mono" type="email" name="email[]" value="{{ old('email.0') }}" required placeholder="nim@mail.unej.ac.id">
+                                <input class="font-mono" type="email" name="email[]" value="<?php echo e(old('email.0')); ?>" required placeholder="nim@mail.unej.ac.id">
                             </div>
                             <div class="col-md-6 cpc-field mb-0">
                                 <label>No. WhatsApp <span class="text-danger">*</span></label>
-                                <input type="text" name="no_hp[]" value="{{ old('no_hp.0') }}" required placeholder="08xxxxxxxxxx">
+                                <input type="text" name="no_hp[]" value="<?php echo e(old('no_hp.0')); ?>" required placeholder="08xxxxxxxxxx">
                             </div>
                         </div>
                     </div>
@@ -589,19 +586,32 @@
                                 <span class="cpc-member-subtitle">Anggota tim inti</span>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>NIM Anggota 1</label>
-                              <input class="form-control" type="number" name="nim[]" value="{{ old('nim[1]') }}" required placeholder="NIM Anggota 1"></div>
+                        <div class="row">
+                            <div class="col-md-6 cpc-field">
+                                <label>Nama Lengkap <span class="text-danger">*</span></label>
+                                <input type="text" name="nama[]" value="<?php echo e(old('nama.1')); ?>" required placeholder="Nama lengkap">
+                            </div>
+                            <div class="col-md-6 cpc-field">
+                                <label>NIM <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="number" name="nim[]" value="<?php echo e(old('nim.1')); ?>" required placeholder="NIM UNEJ">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-md-0">
+                                <label>Email UNEJ <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="email" name="email[]" value="<?php echo e(old('email.1')); ?>" required placeholder="nim@mail.unej.ac.id">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-0">
+                                <label>No. WhatsApp <span class="text-danger">*</span></label>
+                                <input type="text" name="no_hp[]" value="<?php echo e(old('no_hp.1')); ?>" required placeholder="08xxxxxxxxxx">
+                            </div>
                         </div>
                     </div>
 
-                    @php
+                    <?php
                         $hasAnggota3 = old('nama.2') || old('nim.2') || old('email.2') || old('no_hp.2');
-                    @endphp
+                    ?>
 
                     <!-- ANGGOTA 2 (SLOT ANGGOTA KETIGA) -->
-                    <div id="wrapper-anggota-3" style="{{ $hasAnggota3 ? '' : 'display: none;' }}">
+                    <div id="wrapper-anggota-3" style="<?php echo e($hasAnggota3 ? '' : 'display: none;'); ?>">
                         <div class="cpc-member-card cpc-member-card-secondary">
                             <div class="cpc-member-header">
                                 <div>
@@ -615,33 +625,32 @@
                             <div class="row">
                                 <div class="col-md-6 cpc-field">
                                     <label>Nama Lengkap</label>
-                                    <input type="text" name="nama[]" value="{{ old('nama.2') }}" placeholder="Nama lengkap anggota 2">
+                                    <input type="text" name="nama[]" value="<?php echo e(old('nama.2')); ?>" placeholder="Nama lengkap anggota 2">
                                 </div>
                                 <div class="col-md-6 cpc-field">
                                     <label>NIM</label>
-                                    <input class="font-mono" type="number" name="nim[]" value="{{ old('nim.2') }}" placeholder="NIM UNEJ">
+                                    <input class="font-mono" type="number" name="nim[]" value="<?php echo e(old('nim.2')); ?>" placeholder="NIM UNEJ">
                                 </div>
                                 <div class="col-md-6 cpc-field mb-md-0">
                                     <label>Email UNEJ</label>
-                                    <input class="font-mono" type="email" name="email[]" value="{{ old('email.2') }}" placeholder="nim@mail.unej.ac.id">
+                                    <input class="font-mono" type="email" name="email[]" value="<?php echo e(old('email.2')); ?>" placeholder="nim@mail.unej.ac.id">
                                 </div>
                                 <div class="col-md-6 cpc-field mb-0">
                                     <label>No. WhatsApp</label>
-                                    <input type="text" name="no_hp[]" value="{{ old('no_hp.2') }}" placeholder="08xxxxxxxxxx">
+                                    <input type="text" name="no_hp[]" value="<?php echo e(old('no_hp.2')); ?>" placeholder="08xxxxxxxxxx">
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- TRIGGER TAMBAH ANGGOTA KETIGA -->
-                    <div id="btn-add-member" class="cpc-add-member-trigger" style="{{ $hasAnggota3 ? 'display: none;' : '' }}">
+                    <div id="btn-add-member" class="cpc-add-member-trigger" style="<?php echo e($hasAnggota3 ? 'display: none;' : ''); ?>">
                         <div class="cpc-add-member-icon">
                             <i class="fa fa-user-plus"></i>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>NIM Anggota 2</label>
-                              <input class="form-control" type="number" name="nim[]" value="{{ old('nim[2]') }}" placeholder="NIM Anggota 2"></div>
+                        <div class="cpc-add-member-info">
+                            <div class="cpc-add-member-title">Punya Anggota ke-3?</div>
+                            <div class="cpc-add-member-sub">Klik di sini jika tim Anda memiliki 3 peserta untuk mengisi data anggota tambahan.</div>
                         </div>
                         <div class="cpc-btn-slot-action">
                             <i class="fa fa-plus"></i> Tambah Anggota
@@ -659,9 +668,9 @@
         </div>
     </section>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('js')
+<?php $__env->startSection('js'); ?>
 <script>
     $(document).ready(function() {
         $('#btn-add-member').on('click', function() {
@@ -679,4 +688,6 @@
         });
     });
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\idle_2026\resources\views/pages/kompetisi/kti.blade.php ENDPATH**/ ?>
