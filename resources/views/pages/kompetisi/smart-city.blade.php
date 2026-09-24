@@ -42,8 +42,8 @@
                </div>
                <div class="col-auto col-md-6">
                    <p class="text-justify">
-                     Smart City adalah sebuah konsep mengenai kota cerdas yang dirancang guna membantu berbagai kegiatan masyarakat terutama dalam upaya mengelola sumber daya yang ada dengan efisien serta memberikan kemudahan mengakses informasi kepada masyarakat hingga untuk mengantisipasi kejadian yang tidak terduga. Lomba dalam bidang Smart City mencakup konsep mengenai kota cerdas yang dirancang guna membantu berbagai kegiatan masyarakat terutama dalam upaya mengelola sumber daya yang ada dengan efisien serta memberikan kemudahan mengakses informasi kepada masyarakat hingga untuk mengantisipasi kejadian yang tidak terduga.
-                     </p>
+                      Smart City atau Kota Cerdas adalah suatu konsep mengenai pemanfaatan data untuk mengelola kota/melayani masyarakat. Inovasi Kota Cerdas dirancang guna melayani dan membantu berbagai kegiatan masyarakat, terutama dalam mengelola sumber daya secara efisien dan memberikan kemudahan akses informasi kepada masyarakat hingga untuk mengantisipasi kejadian yang tidak terduga. Dengan memahami proses bisnis, regulasi dan teknologi, maka mahasiswa dapat mengusulkan solusi teknologi yang paling tepat untuk sebuah kota, yang tergantung kondisi kota masing-masing.
+                    </p>
                       <a class="btn btn-success shadow" href="https://drive.google.com/drive/folders/1BbOkJMaZHTNMT_gg5sreGPuIAucoLL8k?usp=drive_link" target="_blank" rel="noopener noreferrer">Rule Book</a>
                       <a class="btn btn-success shadow" href="https://docs.google.com/document/d/1oGYlHneLF4kaxm-cH6tkhU3WDfY-SSPaK13DWT4nM4k/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Template</a>
                       <a class="btn btn-success shadow" href="{{ route('kompetisi.peserta', ['kategori' => $kategori->kategori]) }}">Daftar Peserta</a>

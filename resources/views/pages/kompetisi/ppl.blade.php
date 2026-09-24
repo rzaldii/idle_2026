@@ -42,7 +42,7 @@
                </div>
                <div class="col-auto col-md-6">
                    <p class="text-justify">
-                     Pengembangan Perangkat Lunak (PPL) adalah kompetisi perancangan dan pembuatan aplikasi perangkat lunak (software) yang inovatif, solutif, dan berdaya guna untuk mengatasi permasalahan nyata di masyarakat. Lomba ini memberikan ruang bagi peserta untuk mengeksplorasi ide, merancang arsitektur sistem, dan merealisasikannya dalam bentuk produk digital yang fungsional dan berdampak.
+                     Pengembangan Perangkat Lunak merupakan salah satu bidang ajang kompetisi ISIC 2026 yang bertujuan mendorong peserta untuk menghasilkan karya inovatif berupa perangkat lunak yang kreatif, aplikatif, dan berdampak nyata bagi masyarakat. Peserta diberikan kebebasan untuk memilih platform pengembangan yang sesuai, sehingga dapat mengeksplorasi potensi teknologi terkini melalui kolaborasi yang solid demi menciptakan produk yang inovatif, bermanfaat, dan menjawab kebutuhan nyata secara berkelanjutan.
                    </p>
                    <a class="btn btn-success shadow" href="https://drive.google.com/drive/folders/1vpwfPjS0r-jGSwOechkYYkf1DrFZKryH?usp=drive_link" target="_blank" rel="noopener noreferrer">Rule Book</a>
                    <a class="btn btn-success shadow" href="https://docs.google.com/document/d/13n5HiZtK20OSgI2b6icrNgNPkg1aRnvbc32TqH-_QUM/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Template</a>
