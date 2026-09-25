@@ -481,48 +481,40 @@
         </div>
     </section>
 
-    <!-- *****************************************************************************************************************
-       DESCRIPTION
-       ***************************************************************************************************************** -->
-   <div class="card">
-       <div class="card-body">
-           <div class="row">
-               <div class="col-auto col-md-6 align-self-center">
-                  <img class="img-fluid float-right" data-bs-hover-animate="pulse" src="{{asset('assets/img/kategori/'.$kategori->kategori.'.jpg')}}">
-               </div>
-               <div class="col-auto col-md-6">
-                   <p class="text-justify">
-                      Smart City atau Kota Cerdas adalah suatu konsep mengenai pemanfaatan data untuk mengelola kota/melayani masyarakat. Inovasi Kota Cerdas dirancang guna melayani dan membantu berbagai kegiatan masyarakat, terutama dalam mengelola sumber daya secara efisien dan memberikan kemudahan akses informasi kepada masyarakat hingga untuk mengantisipasi kejadian yang tidak terduga. Dengan memahami proses bisnis, regulasi dan teknologi, maka mahasiswa dapat mengusulkan solusi teknologi yang paling tepat untuk sebuah kota, yang tergantung kondisi kota masing-masing.
+    <section style="padding: 50px 0 30px;">
+        <div class="container">
+            <div class="card-kompetisi corner-active p-4 p-md-5 mb-5" data-aos="fade-up" data-aos-duration="850" data-aos-once="true" data-aos-offset="40">
+                <div class="row align-items-center">
+                    <div class="col-12">
+                        <h2 class="font-display font-weight-bold mb-3" style="color: var(--color-text-primary); font-size: 1.75rem;">
+                            Tentang Smart City
+                        </h2>
+
+                        <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify; margin-bottom: 0;">
+                            <strong>Smart City (Kota Cerdas) IDLE 2026</strong> adalah suatu konsep mengenai pemanfaatan data untuk mengelola kota/melayani masyarakat. Inovasi Kota Cerdas dirancang guna melayani dan membantu berbagai kegiatan masyarakat, terutama dalam mengelola sumber daya secara efisien dan memberikan kemudahan akses informasi kepada masyarakat hingga untuk mengantisipasi kejadian yang tidak terduga. Dengan memahami proses bisnis, regulasi dan teknologi, maka mahasiswa dapat mengusulkan solusi teknologi yang paling tepat untuk sebuah kota, yang tergantung kondisi kota masing-masing.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="form-pendaftaran" class="cpc-form-container p-4 p-md-5 mb-5" data-aos="fade-up" data-aos-duration="850" data-aos-once="true" data-aos-offset="40">
+                <div class="text-center mb-4">
+                    <h2 class="font-display font-weight-bold" style="font-size: 1.65rem; color: var(--color-text-primary); margin-bottom: 6px;">
+                        Formulir Registrasi Tim
+                    </h2>
+                    <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0;">
+                        Setiap tim terdiri dari 2 hingga 3 mahasiswa aktif UNEJ. Kolom bertanda <span class="text-danger">*</span> wajib diisi.
                     </p>
-                      <a class="btn btn-success shadow" href="https://drive.google.com/drive/folders/1BbOkJMaZHTNMT_gg5sreGPuIAucoLL8k?usp=drive_link" target="_blank" rel="noopener noreferrer">Rule Book</a>
-                      <a class="btn btn-success shadow" href="https://docs.google.com/document/d/1oGYlHneLF4kaxm-cH6tkhU3WDfY-SSPaK13DWT4nM4k/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Template</a>
-                      <a class="btn btn-success shadow" href="{{ route('kompetisi.peserta', ['kategori' => $kategori->kategori]) }}">Daftar Peserta</a>
-               </div>
-           </div>
-       </div>
-        </div>
-       <div data-bs-parallax-bg="true" class="register-img">
-            <form method="post" class="register-form" action="{{ route('kompetisi.store', ['kategori' => $kategori->id]) }}" method="POST">
-              {{-- <h1 class="text-center" style="font-family: Nunito, sans-serif;font-weight: bold;color: rgb(255,255,255);"> Pendaftaran kompetisi {{ $kategori->nama_kategori }} sudah ditutup! <br>
-              Nantikan kami di ISIC tahun depan :)</h1> --}}
-              @csrf
-                <input type="hidden" value="{{ $kategori->id }}" name="kategori">
-                <h2 class="text-center" style="font-family: Nunito, sans-serif;font-weight: bold;color: rgb(255,255,255);">Pendaftaran</h2>
-                <div class="form-group">
-                  <label>Nama Tim</label>
-                  <input class="form-control" type="text" name="nama_tim" value="{{ old('nama_tim') }}" placeholder="Nama Tim"></div>
-                <div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Nama Ketua</label>
-                              <input class="form-control" type="text" name="nama[]" value="{{ old('nama[0]') }}" required placeholder="Nama Ketua"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>NIM Ketua</label>
-                              <input class="form-control" type="number" name="nim[]" value="{{ old('nim[0]') }}" required placeholder="NIM Ketua"></div>
-                        </div>
+                </div>
+
+                <form method="POST" action="{{ route('kompetisi.store', ['kategori' => $kategori->id]) }}">
+                    @csrf
+                    <input type="hidden" value="{{ $kategori->id }}" name="kategori">
+
+                    <!-- IDENTITAS TIM -->
+                    <div class="cpc-field mb-4">
+                        <label>Nama Tim <span class="text-danger">*</span></label>
+                        <input type="text" id="nama_tim" name="nama_tim" value="{{ old('nama_tim') }}" required placeholder="Masukkan nama tim">
                     </div>
 
                     <!-- KETUA TIM -->
@@ -561,10 +553,23 @@
                                 <span class="cpc-member-subtitle">Anggota tim inti</span>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>NIM Anggota 1</label>
-                              <input class="form-control" type="number" name="nim[]" value="{{ old('nim[1]') }}" required placeholder="NIM Anggota 1"></div>
+                        <div class="row">
+                            <div class="col-md-6 cpc-field">
+                                <label>Nama Lengkap <span class="text-danger">*</span></label>
+                                <input type="text" name="nama[]" value="{{ old('nama.1') }}" required placeholder="Nama lengkap anggota 1">
+                            </div>
+                            <div class="col-md-6 cpc-field">
+                                <label>NIM <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="number" name="nim[]" value="{{ old('nim.1') }}" required placeholder="NIM UNEJ">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-md-0">
+                                <label>Email UNEJ <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="email" name="email[]" value="{{ old('email.1') }}" required placeholder="nim@mail.unej.ac.id">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-0">
+                                <label>No. WhatsApp <span class="text-danger">*</span></label>
+                                <input type="text" name="no_hp[]" value="{{ old('no_hp.1') }}" required placeholder="08xxxxxxxxxx">
+                            </div>
                         </div>
                     </div>
 
@@ -610,10 +615,9 @@
                         <div class="cpc-add-member-icon">
                             <i class="fa fa-user-plus"></i>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>NIM Anggota 2</label>
-                              <input class="form-control" type="number" name="nim[]" value="{{ old('nim[2]') }}" placeholder="NIM Anggota 2"></div>
+                        <div class="cpc-add-member-info">
+                            <div class="cpc-add-member-title">Punya Anggota ke-3?</div>
+                            <div class="cpc-add-member-sub">Klik di sini jika tim Anda memiliki 3 peserta untuk mengisi data anggota tambahan.</div>
                         </div>
                         <div class="cpc-btn-slot-action">
                             <i class="fa fa-plus"></i> Tambah Anggota
