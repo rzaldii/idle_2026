@@ -762,7 +762,7 @@
       </button>
       <div id="faq-isic-7" class="collapse" data-parent="#faqAccordion">
         <div class="faq-body-content">
-          ISIC 2026 akan dibuka pada tanggal 26 September 2026 sekaligus bersamaan dengan pendaftaran Tim serta Pengumpulan Proposal dan Poster. Tahap 1/Penyisihan berlangsung mulai 26 September - 6 Oktober 2025. Untuk Tahap 2/Final berlangsung mulai 12 - 17 Oktober 2025 untuk pengumpulan PPT Final dan 18 Oktober 2025 untuk Presentasi Final.
+          ISIC 2026 akan dibuka pada tanggal 26 September 2026 sekaligus bersamaan dengan pendaftaran Tim serta Pengumpulan Proposal dan Poster. Tahap 1/Penyisihan berlangsung mulai 26 September - 6 Oktober 2026. Untuk Tahap 2/Final berlangsung mulai 12 - 17 Oktober 2026 untuk pengumpulan PPT Final dan 18 Oktober 2026 untuk Presentasi Final.
         </div>
       </div>
     </div>
@@ -969,11 +969,11 @@
       </button>
       <div id="faq-laos-3" class="collapse" data-parent="#faqAccordion">
         <div class="faq-body-content">
-          Pembukaan LAOS Arena dilaksanakan pada 26 September dan penutupan pada 25 Oktober 2025.
+          Pembukaan LAOS Arena dilaksanakan pada 26 September dan penutupan pada 25 Oktober 2026.
           <ul>
-            <li><strong>Pendaftaran:</strong> 26 September - 8 Oktober 2025</li>
-            <li><strong>Babak Qualification:</strong> 11 Oktober 2025</li>
-            <li><strong>Babak Final:</strong> 18 Oktober 2025</li>
+            <li><strong>Pendaftaran:</strong> 26 September - 8 Oktober 2026</li>
+            <li><strong>Babak Qualification:</strong> 11 Oktober 2026</li>
+            <li><strong>Babak Final:</strong> 18 Oktober 2026</li>
           </ul>
         </div>
       </div>
