@@ -1,12 +1,12 @@
 @extends('layouts.base')
 
-@section('title', 'IDLe 2026 — Kompetisi Internet of Things (IoT)')
+@section('title', 'IDLe 2026 — Kompetisi Animation (Animasi)')
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('assets/css/idle-design-system.css') }}">
 <style>
     /* =========================================================
-       Scoped Styling for IoT Page — IDLE 2026 Retro Arcade Theme
+       Scoped Styling for Animasi Page — IDLE 2026 Retro Arcade Theme
        ========================================================= */
     body {
         background-color: var(--color-bg-base, #F8F5FF);
@@ -384,11 +384,11 @@
             <div class="row align-items-center">
                 <div class="col-lg-7">
                     <h1 class="kompetisi-title">
-                        Kompetisi <span class="text-neon-cyan">Internet of Things</span> (IoT)
+                        Kompetisi <span class="text-neon-cyan">Animation</span> (ITeC 2026)
                     </h1>
 
                     <p class="kompetisi-subtitle">
-                        Rancang dan kembangkan integrasi sistem cerdas berbasis hardware, sensor, serta jaringan data untuk menjawab tantangan otomatisasi dan inovasi smart society modern.
+                        Ciptakan karya animasi kreatif yang komunikatif dan sarat pesan edukatif untuk menyuarakan isu Sustainable Development Goals (SDGs) demi terwujudnya inovasi digital berkelanjutan.
                     </p>
 
                     <div class="kompetisi-actions">
@@ -398,7 +398,7 @@
                         <a href="https://drive.google.com/drive/folders/13rCnJi1wkMmMkJaWuY4a1f2HDB1fvvcw" target="_blank" class="btn-idle-secondary">
                             <i class="fa fa-file-pdf-o" style="margin-right: 8px;"></i> Unduh Guidebook
                         </a>
-                        <a href="https://docs.google.com/document/d/15Lp-hCiV6nCVvesS3kL8mIPPs4YpwT1HzKLpByfTDPQ/edit?usp=sharing" target="_blank" class="btn-idle-outline">
+                        <a href="https://docs.google.com/document/d/1-Y4RZYlIwvZNSKUAYr_z1G2gtnZqnL5JtSwxfi1YF3A/edit?usp=sharing" target="_blank" class="btn-idle-outline">
                             <i class="fa fa-file-text-o" style="margin-right: 8px;"></i> Template Proposal
                         </a>
                         <a href="{{ route('kompetisi.peserta', ['kategori' => $kategori->kategori]) }}" class="btn-idle-outline" title="Klik untuk melihat daftar tim">
@@ -412,7 +412,7 @@
                         <img class="kompetisi-poster-img" 
                              src="{{ asset('assets/img/kategori/'.$kategori->kategori.'.jpg') }}" 
                              alt="Poster {{ $kategori->nama_kategori }}"
-                             onerror="this.onerror=null; this.src='{{ asset('assets/img/kategori/iot.jpg') }}'">
+                             onerror="this.onerror=null; this.src='{{ asset('assets/img/kategori/animasi.jpg') }}'">
                     </div>
                 </div>
             </div>
@@ -429,15 +429,15 @@
                 <div class="row align-items-center">
                     <div class="col-12">
                         <h2 class="font-display font-weight-bold mb-3" style="color: var(--color-text-primary); font-size: 1.75rem;">
-                            Tentang Internet of Things ITeC 2026
+                            Tentang Animation ITeC 2026
                         </h2>
 
                         <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify;">
-                            Internet of Things (IoT) ITeC 2026 merupakan cabang kompetisi perancangan dan implementasi solusi berbasis teknologi terhubung untuk menjawab permasalahan nyata di masyarakat. Kompetisi ini mendorong peserta untuk mengembangkan solusi yang efektif, efisien, dan berkelanjutan dalam mendukung kehidupan masyarakat serta mencapai tujuan Sustainable Development Goals (SDGs), sejalan dengan tema utama “Digital Innovation for Smart Society: Empowering Sustainable, Inclusive, and Impactful Technology”.
+                            Animation ITeC 2026 merupakan cabang kompetisi penciptaan karya animasi yang berfokus pada penyampaian gagasan, edukasi, dan pesan positif melalui karya yang kreatif dan komunikatif. Kompetisi ini mendorong peserta untuk mengangkat isu yang relevan dengan Sustainable Development Goals (SDGs) serta mengembangkan karya yang mampu memberikan dampak dan manfaat bagi masyarakat, sejalan dengan tema utama “Digital Innovation for Smart Society: Empowering Sustainable, Inclusive, and Impactful Technology”.
                         </p>
 
                         <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify; margin-bottom: 0;">
-                            Peserta ditantang untuk merancang dan mengimplementasikan solusi yang mengintegrasikan perangkat, sensor, serta teknologi pengolahan data sesuai dengan permasalahan yang diangkat. Karya yang dikembangkan akan dipresentasikan pada babak final untuk menjelaskan konsep, implementasi, manfaat, serta keterkaitannya dengan isu SDGs.
+                            Peserta ditantang untuk mengembangkan konsep dan karya animasi yang menarik, mudah dipahami, serta mampu menyampaikan pesan secara efektif. Karya yang dikembangkan akan dipresentasikan pada babak final untuk menjelaskan konsep, pesan, serta keterkaitannya dengan isu SDGs yang diangkat.
                         </p>
                     </div>
                 </div>

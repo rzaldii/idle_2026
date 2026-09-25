@@ -26,6 +26,39 @@ class HomeController extends Controller
     public function index()
     {
         $kategoris = Kategori::get();
+
+        // Pastikan kategori Animasi ikut tampil di beranda jika belum ada di database
+        if (!$kategoris->contains('kategori', 'animasi')) {
+            $animasi = new Kategori();
+            $animasi->id = 99;
+            $animasi->id_ormawa = 2; // Himatif
+            $animasi->nama_kategori = 'Animasi';
+            $animasi->kategori = 'animasi';
+            $kategoris->push($animasi);
+        }
+
+        // Urutan baku card lomba IDLe 2026:
+        // Himasif (ISIC): PPL/Software Dev, Bisnis TIK, Smart City
+        // Himatif (ITeC): UI/UX, IoT, Game Development, Animasi (runtut setelah Smart City)
+        // HMIF (I-COM): CPC, KTI
+        // UKM LAOS (LAOS Arena): CTF
+        $order = [
+            'ppl' => 1, 'software' => 1,
+            'bisnis-tik' => 2, 'bisnis-development' => 2,
+            'smart-city' => 3,
+            'uiux' => 4,
+            'iot' => 5,
+            'game' => 6, 'gamedev' => 6, 'game-dev' => 6,
+            'animasi' => 7,
+            'cpc' => 8,
+            'kti' => 9,
+            'ctf' => 10,
+        ];
+
+        $kategoris = $kategoris->sortBy(function($kat) use ($order) {
+            return $order[$kat->kategori] ?? 99;
+        })->values();
+
         $posts = Post::with('user')
             ->orderBy('created_at', 'desc')
             ->paginate(8);

@@ -81,17 +81,33 @@
             <!-- Horizontal Scroll Container for Competition Cards -->
             <div class="competisi-scroll-container">
                 @foreach($kategoris as $kategori)
+                @php
+                    $imgName = $kategori->kategori;
+                    if (!file_exists(public_path('assets/img/kategori/' . $imgName . '.jpg'))) {
+                        if (($imgName == 'game' || $imgName == 'game-dev') && file_exists(public_path('assets/img/kategori/gamedev.jpg'))) {
+                            $imgName = 'gamedev';
+                        } elseif ($imgName == 'gamedev' && file_exists(public_path('assets/img/kategori/game-dev.jpg'))) {
+                            $imgName = 'game-dev';
+                        } elseif ($imgName == 'gamedev' && file_exists(public_path('assets/img/kategori/game.jpg'))) {
+                            $imgName = 'game';
+                        }
+                    }
+                    $judulKategori = $kategori->nama_kategori;
+                    if (in_array(strtolower($kategori->kategori), ['game', 'game-dev', 'gamedev']) || strtolower($judulKategori) == 'game' || strtolower($judulKategori) == 'game dev') {
+                        $judulKategori = 'Game Development';
+                    }
+                @endphp
                 <div class="competisi-scroll-item">
                     <a href="{{ route('kompetisi.index', ['kategori' => $kategori->kategori]) }}" class="card-kompetisi">
                         <div class="card-kompetisi-img-wrap">
-                            <img src="{{ asset('assets/img/kategori/'.$kategori->kategori.'.jpg') }}" 
-                                 alt="{{ $kategori->nama_kategori }}" 
+                            <img src="{{ asset('assets/img/kategori/'.$imgName.'.jpg') }}" 
+                                 alt="{{ $judulKategori }}" 
                                  class="card-kompetisi-img"
                                  onerror="this.onerror=null; this.src='{{ asset('assets/img/kategori/ppl.jpg') }}'">
                         </div>
                         <div class="card-kompetisi-body">
                             <div>
-                                <h4 class="card-kompetisi-title">{{ $kategori->nama_kategori }}</h4>
+                                <h4 class="card-kompetisi-title">{{ $judulKategori }}</h4>
                             </div>
                             <div class="card-kompetisi-action">
                                 <span>Detail Kompetisi</span>

@@ -11,11 +11,19 @@ class KompetisiController extends Controller
     public function getPagesByCategory($kategori)
     {
         $kategoris = Kategori::get();
-        if (count(Kategori::where('kategori', $kategori)->get()) <= 0) {
+        $kat = Kategori::where('kategori', $kategori)->first();
+        if (!$kat) {
+            if ($kategori == 'animasi') {
+                $kat = new Kategori();
+                $kat->id = 99;
+                $kat->id_ormawa = 2; // Himatif
+                $kat->nama_kategori = 'Animasi';
+                $kat->kategori = 'animasi';
+                return view('pages.kompetisi.animasi', ['kategoris' => $kategoris, 'kategori' => $kat]);
+            }
             return response()->view('errors.404_not_found');
         }
-        $kategori = Kategori::where('kategori', $kategori)->get()->first();
-        return view('pages.kompetisi.' . $kategori->kategori, compact('kategoris', 'kategori'));
+        return view('pages.kompetisi.' . $kat->kategori, ['kategoris' => $kategoris, 'kategori' => $kat]);
     }
 
     public function getPagePeserta($kategori)
