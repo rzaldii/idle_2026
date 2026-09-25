@@ -1,143 +1,537 @@
-<?php $__env->startSection('title', 'IDLe ' . $kategori->nama_kategori); ?>
+<?php $__env->startSection('title', 'IDLE 2026 — Kompetisi ' . $kategori->nama_kategori); ?>
 
 <?php $__env->startSection('css'); ?>
-<style media="screen">
-  label{
-    color: white;
-    font-weight: bold;
-  }
-  body{
-    background-color: #F3F2F0;
-  }
-  .card{
-    border-radius: 10px;
-    padding: 25px 10%;
-    min-height: 500px;
-  }
+<link rel="stylesheet" href="<?php echo e(asset('assets/css/idle-design-system.css')); ?>">
+<style>
+    /* =========================================================
+       Scoped Styling for CPC Page — IDLE 2026 Retro Arcade Theme
+       ========================================================= */
+    body {
+        background-color: var(--color-bg-base, #F8F5FF);
+        font-family: var(--font-body, 'Inter', sans-serif);
+        color: var(--color-text-primary, #0F0A1E);
+    }
+
+    .cpc-page-wrapper {
+        background-color: var(--color-bg-base, #F8F5FF);
+        min-height: 100vh;
+    }
+
+    /* Hero Section */
+    .cpc-hero {
+        padding: 130px 0 60px;
+        background: var(--gradient-hero-overlay, linear-gradient(180deg, #F8F5FF 0%, #EDE8FF 60%, #F8F5FF 100%));
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cpc-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(0, 200, 221, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 200, 221, 0.05) 1px, transparent 1px);
+        background-size: 40px 40px;
+        pointer-events: none;
+    }
+
+    .cpc-badge-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .cpc-title {
+        font-family: var(--font-display, 'Space Grotesk', sans-serif);
+        font-weight: 700;
+        font-size: clamp(2rem, 3.8vw, 3rem);
+        line-height: 1.18;
+        color: var(--color-text-primary, #0F0A1E);
+        margin-bottom: 16px;
+    }
+
+    .cpc-subtitle {
+        font-family: var(--font-body, 'Inter', sans-serif);
+        font-size: 1.05rem;
+        color: var(--color-text-secondary, #4A3F6B);
+        max-width: 650px;
+        line-height: 1.65;
+        margin-bottom: 24px;
+    }
+
+    .cpc-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+    }
+
+    /* Buttons — Basic, Clean & Responsive Hover */
+    .btn-idle-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-pill, 9999px);
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0, 200, 221, 0.2) !important;
+        transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease !important;
+        will-change: transform;
+        transform: translateZ(0);
+    }
+
+    .btn-idle-primary:hover {
+        transform: translate3d(0, -2px, 0);
+        box-shadow: 0 5px 14px rgba(0, 200, 221, 0.32) !important;
+        background-color: var(--color-cyan-400, #22DDEE) !important;
+    }
+
+    .btn-idle-primary:active {
+        transform: translate3d(0, 0, 0);
+        box-shadow: 0 2px 6px rgba(0, 200, 221, 0.2) !important;
+    }
+
+    .btn-idle-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-pill, 9999px);
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(232, 0, 192, 0.18) !important;
+        transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease !important;
+        will-change: transform;
+        transform: translateZ(0);
+    }
+
+    .btn-idle-secondary:hover {
+        transform: translate3d(0, -2px, 0);
+        box-shadow: 0 5px 14px rgba(232, 0, 192, 0.28) !important;
+        background-color: var(--color-magenta-400, #FF3FD8) !important;
+    }
+
+    .btn-idle-secondary:active {
+        transform: translate3d(0, 0, 0);
+    }
+
+    .btn-idle-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-pill, 9999px);
+        font-weight: 600;
+        transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease !important;
+        will-change: transform;
+        transform: translateZ(0);
+    }
+
+    .btn-idle-outline:hover {
+        transform: translate3d(0, -2px, 0);
+        box-shadow: 0 4px 12px rgba(0, 200, 221, 0.2) !important;
+    }
+
+    .btn-idle-outline:active {
+        transform: translate3d(0, 0, 0);
+    }
+
+    /* Poster Frame */
+    .cpc-poster-box {
+        position: relative;
+        border-radius: var(--radius-md, 12px);
+        overflow: hidden;
+        border: 2px solid var(--color-border, #DDD5F0);
+        box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 10, 30, 0.08));
+        background: #FFFFFF;
+        transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease;
+        will-change: transform;
+        transform: translateZ(0);
+    }
+
+    .cpc-poster-box:hover {
+        transform: translate3d(0, -3px, 0);
+        box-shadow: 0 8px 20px rgba(15, 10, 30, 0.1), 0 2px 8px rgba(0, 200, 221, 0.15);
+        border-color: var(--color-cyan-500, #00C8DD);
+    }
+
+    .cpc-poster-img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+    }
+
+    /* Stat Chips */
+    .cpc-stat-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #FFFFFF;
+        border: 1px solid var(--color-border, #DDD5F0);
+        border-radius: var(--radius-pill, 9999px);
+        padding: 6px 14px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--color-text-secondary, #4A3F6B);
+        box-shadow: var(--shadow-xs, 0 1px 3px rgba(15, 10, 30, 0.08));
+        transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s ease, box-shadow 0.2s ease;
+        will-change: transform;
+        transform: translateZ(0);
+    }
+
+    .cpc-stat-pill:hover {
+        transform: translate3d(0, -2px, 0);
+        border-color: var(--color-cyan-500, #00C8DD);
+        box-shadow: 0 3px 8px rgba(0, 200, 221, 0.15);
+    }
+
+    .cpc-stat-pill i {
+        color: var(--color-cyan-500, #00C8DD);
+    }
+
+    /* About Card */
+    .card-kompetisi {
+        background: #FFFFFF !important;
+        transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.25s ease !important;
+        will-change: transform;
+        transform: translateZ(0);
+    }
+
+    .card-kompetisi:hover {
+        transform: translate3d(0, -3px, 0);
+        background: #FFFFFF !important;
+        border-color: var(--color-cyan-500, #00C8DD) !important;
+        box-shadow: 0 8px 20px rgba(15, 10, 30, 0.08), 0 2px 8px rgba(0, 200, 221, 0.1) !important;
+    }
+
+    /* Simple & Silky Smooth Entrance Animations — Extended Duration */
+    @keyframes  cpcSimpleFadeUp {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 20px, 0);
+        }
+        to {
+            opacity: 1;
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    .cpc-animate-hero-left {
+        animation: cpcSimpleFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        will-change: opacity, transform;
+    }
+
+    .cpc-animate-hero-right {
+        animation: cpcSimpleFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+        opacity: 0;
+        will-change: opacity, transform;
+    }
+
+    /* Hardware-accelerated AOS settings with smooth cubic-bezier for scrolling */
+    [data-aos] {
+        transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+
+    /* Form Container & Member Cards */
+    .cpc-form-container {
+        width: 100%;
+        background: #FFFFFF;
+        border: 2px solid var(--color-border, #DDD5F0);
+        border-radius: var(--radius-md, 12px);
+        box-shadow: var(--shadow-sm, 0 2px 8px rgba(15, 10, 30, 0.08));
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cpc-form-container:hover {
+        border-color: #D2C6EC;
+        box-shadow: 0 4px 16px rgba(15, 10, 30, 0.08);
+    }
+
+    .cpc-member-card {
+        background: #FAF9FF;
+        border: 1px solid #ECE7FA;
+        border-radius: var(--radius-md, 12px);
+        padding: 18px 20px;
+        margin-bottom: 18px;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+    }
+
+    .cpc-member-card:hover,
+    .cpc-member-card:focus-within {
+        background: #FFFFFF;
+        border-color: rgba(0, 200, 221, 0.45);
+        box-shadow: 0 3px 12px rgba(15, 10, 30, 0.05);
+    }
+
+    .cpc-member-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #EBE5F7;
+    }
+
+    .cpc-member-title {
+        font-family: var(--font-display, 'Space Grotesk', sans-serif);
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--color-text-primary, #0F0A1E);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0;
+    }
+
+    .cpc-tag-required {
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: rgba(0, 200, 221, 0.15);
+        color: var(--color-cyan-600, #00A8BB);
+        letter-spacing: 0.04em;
+    }
+
+    .cpc-tag-optional {
+        font-size: 0.72rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: rgba(232, 0, 192, 0.12);
+        color: var(--color-magenta-600, #C200A0);
+        letter-spacing: 0.04em;
+    }
+
+    .cpc-field {
+        margin-bottom: 14px;
+    }
+
+    .cpc-field label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--color-text-secondary, #4A3F6B);
+        margin-bottom: 5px;
+        transition: color 0.2s ease;
+    }
+
+    .cpc-field:focus-within label {
+        color: var(--color-cyan-600, #00A8BB);
+    }
+
+    .cpc-field input {
+        background: #FFFFFF;
+        border: 1.5px solid var(--color-border, #DDD5F0);
+        border-radius: var(--radius-sm, 8px);
+        padding: 9px 13px;
+        font-size: 0.92rem;
+        color: var(--color-text-primary, #0F0A1E);
+        width: 100%;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cpc-field input:hover {
+        border-color: #BDB2DF;
+    }
+
+    .cpc-field input:focus {
+        outline: none;
+        border-color: var(--color-cyan-500, #00C8DD);
+        box-shadow: 0 0 0 3px rgba(0, 200, 221, 0.15);
+    }
+
+    .text-neon-cyan {
+        color: var(--color-cyan-600) !important;
+        text-shadow: 0 1px 6px rgba(0, 200, 221, 0.2) !important;
+    }
+
+    @media (max-width: 768px) {
+        .cpc-hero {
+            padding: 95px 0 40px;
+        }
+        .cpc-form-container {
+            padding: 24px 16px;
+        }
+        .cpc-member-card {
+            padding: 14px 12px;
+        }
+    }
 </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('content'); ?>
-    <div class="container hero" style="margin-top: 1px;">
-        <div class="row">
-            <div class="col-md-12" style="height: auto;padding-top: 62px;">
-                <div style="margin-bottom: 11px;">
-                    <h1  style="color: rgb(0,0,0);margin-top: 71px;, sans-serif;"></h1>
-                    <h1 class="text-center page_title">Kompetisi <?php echo e($kategori->nama_kategori); ?></h1>
+<div class="cpc-page-wrapper">
+    <section class="cpc-hero">
+        <div class="container position-relative">
+            <div class="row align-items-center">
+                <div class="col-lg-7 cpc-animate-hero-left">
+                    <h1 class="cpc-title">
+                        Kompetisi <span class="text-neon-cyan">Competitive Programming</span> (CPC)
+                    </h1>
+
+                    <p class="cpc-subtitle">
+                        Uji kecepatan penalaran logika, pemecahan masalah algoritma tingkat tinggi, dan optimalisasi efisiensi memori serta waktu eksekusi dalam arena kompetisi developer berstandar nasional.
+                    </p>
+
+                    <div class="cpc-actions">
+                        <a href="#form-pendaftaran" class="btn-idle-primary">
+                            <i class="fa fa-edit" style="margin-right: 8px;"></i> Daftar Sekarang
+                        </a>
+                        <a href="<?php echo e(asset('assets/rulebook/'.$kategori->kategori.'.pdf')); ?>" target="_blank" class="btn-idle-secondary">
+                            <i class="fa fa-file-pdf-o" style="margin-right: 8px;"></i> Unduh Rule Book
+                        </a>
+                        <a href="<?php echo e(route('kompetisi.peserta', ['kategori' => $kategori->kategori])); ?>" class="btn-idle-outline">
+                            <i class="fa fa-users" style="margin-right: 8px;"></i> Lihat Peserta
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 mt-4 mt-lg-0 text-center cpc-animate-hero-right">
+                    <div class="cpc-poster-box mx-auto" style="max-width: 460px;">
+                        <img class="cpc-poster-img" src="<?php echo e(asset('assets/img/kategori/'.$kategori->kategori.'.jpg')); ?>" alt="Poster <?php echo e($kategori->nama_kategori); ?>">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- *****************************************************************************************************************
-       DESCRIPTION
-       ***************************************************************************************************************** -->
-   <div class="card">
-       <div class="card-body">
-           <div class="row">
-               <div class="col-auto col-md-6 align-self-center">
-                  <img class="img-fluid float-right" data-bs-hover-animate="pulse" src="<?php echo e(asset('assets/img/kategori/'.$kategori->kategori.'.jpg')); ?>">
-               </div>
-               <div class="col-auto col-md-6">
-                   <p class="text-justify">
-                     Competitive Programming Competition adalah lomba menyelesaikan suatu permasalahan yang ada dengan bahasa pemrograman. Dalam Competitive Programming tidak diperlukan User Interface atau GUI sehingga program yang dibuat hanya program sederhana yang berjalan pada command line dan hanya perlu membaca masukan dan menghasilkan keluaran saja. Selain itu program yang dibuat terdapat batasan waktu dan memory yang digunakan.
-                     </p>
-                     <a class="btn btn-success shadow" href="<?php echo e(asset('assets/rulebook/'.$kategori->kategori.'.pdf')); ?>">Rule Book</a>
-                     <a class="btn btn-success shadow" href="<?php echo e(route('kompetisi.peserta', ['kategori' => $kategori->kategori])); ?>">Daftar Peserta</a>
-               </div>
-           </div>
-       </div>
+    <section style="padding: 50px 0 30px;">
+        <div class="container">
+            <div class="card-kompetisi corner-active p-4 p-md-5 mb-5" data-aos="fade-up" data-aos-duration="850" data-aos-once="true" data-aos-offset="40">
+                <div class="row align-items-center">
+                        <h2 class="font-display font-weight-bold mb-3" style="color: var(--color-text-primary); font-size: 1.75rem;">
+                            Tentang Competitive Programming Contest
+                        </h2>
+
+                        <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify;">
+                            <strong>Competitive Programming Contest (CPC) IDLE 2026</strong> adalah ajang adu kecakapan menyelesaikan serangkaian persoalan algoritma dan pemecahan masalah (*problem solving*) menggunakan bahasa pemrograman pilihan. Pada cabang lomba ini, solusi tidak memerlukan User Interface (GUI), melainkan program berbasis *Command Line Interface* (CLI) murni yang membaca masukan melalui *standard input* dan mencetak keluaran terstandar.
+                        </p>
+
+                        <p style="color: var(--color-text-secondary); line-height: 1.75; font-size: 0.95rem; text-align: justify;">
+                            Setiap berkas solusi akan dievaluasi secara otomatis oleh sistem juri dengan batasan waktu komputasi (*time limit*) dan alokasi memori (*memory limit*) yang ketat. Peringkat dinilai berdasarkan banyaknya problem yang terpecahkan dengan benar (*accepted*) serta akumulasi penalti waktu terendah.
+                        </p>
+                </div>
+            </div>
+
+
+            <div id="form-pendaftaran" class="cpc-form-container p-4 p-md-5 mb-5" data-aos="fade-up" data-aos-duration="850" data-aos-once="true" data-aos-offset="40">
+                <div class="text-center mb-4">
+                    <h2 class="font-display font-weight-bold" style="font-size: 1.65rem; color: var(--color-text-primary); margin-bottom: 6px;">
+                        Formulir Registrasi Tim
+                    </h2>
+                    <p style="color: var(--color-text-secondary); font-size: 0.88rem; margin: 0;">
+                        Lengkapi informasi tim dan data peserta di bawah ini.
+                    </p>
+                </div>
+
+                <form method="POST" action="<?php echo e(route('kompetisi.store', ['kategori' => $kategori->id])); ?>">
+                    <?php echo csrf_field(); ?>
+                    <input type="hidden" value="<?php echo e($kategori->id); ?>" name="kategori">
+
+                    <!-- IDENTITAS TIM -->
+                    <div class="cpc-field mb-4">
+                        <label>Nama Tim <span class="text-danger">*</span></label>
+                        <input type="text" id="nama_tim" name="nama_tim" value="<?php echo e(old('nama_tim')); ?>" required placeholder="Masukkan nama tim">
+                    </div>
+
+                    <!-- KETUA TIM -->
+                    <div class="cpc-member-card">
+                        <div class="cpc-member-header">
+                            <h3 class="cpc-member-title">
+                                Data Ketua Tim
+                            </h3>
+                            <span class="cpc-tag-required">WAJIB</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 cpc-field">
+                                <label>Nama Lengkap <span class="text-danger">*</span></label>
+                                <input type="text" name="nama[]" value="<?php echo e(old('nama.0')); ?>" required placeholder="Nama lengkap">
+                            </div>
+                            <div class="col-md-6 cpc-field">
+                                <label>NIM <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="text" name="nim[]" value="<?php echo e(old('nim.0')); ?>" required placeholder="NIM UNEJ" pattern="[0-9]{12,13}" inputmode="numeric">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-md-0">
+                                <label>Email UNEJ <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="email" name="email[]" value="<?php echo e(old('email.0')); ?>" required placeholder="nim@mail.unej.ac.id">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-0">
+                                <label>No. WhatsApp <span class="text-danger">*</span></label>
+                                <input type="text" name="no_hp[]" value="<?php echo e(old('no_hp.0')); ?>" required placeholder="08xxxxxxxxxx">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ANGGOTA 1 -->
+                    <div class="cpc-member-card">
+                        <div class="cpc-member-header">
+                            <h3 class="cpc-member-title">
+                                Data Anggota 1
+                            </h3>
+                            <span class="cpc-tag-required">WAJIB</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 cpc-field">
+                                <label>Nama Lengkap <span class="text-danger">*</span></label>
+                                <input type="text" name="nama[]" value="<?php echo e(old('nama.1')); ?>" required placeholder="Nama lengkap">
+                            </div>
+                            <div class="col-md-6 cpc-field">
+                                <label>NIM <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="text" name="nim[]" value="<?php echo e(old('nim.1')); ?>" required placeholder="NIM UNEJ" pattern="[0-9]{12,13}" inputmode="numeric">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-md-0">
+                                <label>Email UNEJ <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="email" name="email[]" value="<?php echo e(old('email.1')); ?>" required placeholder="nim@mail.unej.ac.id">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-0">
+                                <label>No. WhatsApp <span class="text-danger">*</span></label>
+                                <input type="text" name="no_hp[]" value="<?php echo e(old('no_hp.1')); ?>" required placeholder="08xxxxxxxxxx">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ANGGOTA 2 (OPSIONAL) -->
+                    <div class="cpc-member-card">
+                        <div class="cpc-member-header">
+                            <h3 class="cpc-member-title">
+                                Data Anggota 2
+                            </h3>
+                            <span class="cpc-tag-optional">OPSIONAL</span>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 cpc-field">
+                                <label>Nama Lengkap</label>
+                                <input type="text" name="nama[]" value="<?php echo e(old('nama.2')); ?>" placeholder="Kosongkan bila 2 orang">
+                            </div>
+                            <div class="col-md-6 cpc-field">
+                                <label>NIM</label>
+                                <input class="font-mono" type="text" name="nim[]" value="<?php echo e(old('nim.2')); ?>" placeholder="NIM UNEJ" pattern="[0-9]{12,13}" inputmode="numeric">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-md-0">
+                                <label>Email UNEJ</label>
+                                <input class="font-mono" type="email" name="email[]" value="<?php echo e(old('email.2')); ?>" placeholder="nim@mail.unej.ac.id">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-0">
+                                <label>No. WhatsApp</label>
+                                <input type="text" name="no_hp[]" value="<?php echo e(old('no_hp.2')); ?>" placeholder="08xxxxxxxxxx">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SUBMIT BUTTON -->
+                    <div class="text-center pt-3">
+                        <button class="btn-idle-primary" type="submit" style="min-width: 220px; padding: 12px 32px; font-size: 0.95rem;">
+                            <i class="fa fa-paper-plane" style="margin-right: 8px;"></i> Kirim Pendaftaran
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-       <div data-bs-parallax-bg="true" class="register-img">
-            <form method="post" class="register-form" action="<?php echo e(route('kompetisi.store', ['kategori' => $kategori->id])); ?>" method="POST">
-                <?php echo csrf_field(); ?>
-                <input type="hidden" value="<?php echo e($kategori->id); ?>" name="kategori">
-                <h2 class="text-center" style="font-family: Nunito, sans-serif;font-weight: bold;color: rgb(255,255,255);">Pendaftaran</h2>
-                <div class="form-group">
-                  <label>Nama Tim</label>
-                  <input class="form-control" type="text" name="nama_tim" value="<?php echo e(old('nama_tim')); ?>" placeholder="Nama Tim"></div>
-                <div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Nama Ketua</label>
-                              <input class="form-control" type="text" name="nama[]" value="<?php echo e(old('nama[0]')); ?>" required placeholder="Nama Ketua"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>NIM Ketua</label>
-                              <input class="form-control" type="number" name="nim[]" value="<?php echo e(old('nim[0]')); ?>" required placeholder="NIM Ketua"></div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Email Ketua</label>
-                              <input class="form-control" type="email" name="email[]" value="<?php echo e(old('email[0]')); ?>" required placeholder="Email Ketua"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>No. Whatsapp Ketua</label>
-                              <input class="form-control" type="text" name="no_hp[]" value="<?php echo e(old('no_hp[0]')); ?>" required placeholder="No. Whatsapp Ketua"></div>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top: 30px;">
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Nama Anggota 1</label>
-                              <input class="form-control" type="text" name="nama[]" value="<?php echo e(old('nama[1]')); ?>" required placeholder="Nama Anggota 1"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>NIM Anggota 1</label>
-                              <input class="form-control" type="number" name="nim[]" value="<?php echo e(old('nim[1]')); ?>" required placeholder="NIM Anggota 1"></div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Email Anggota 1</label>
-                              <input class="form-control" type="email" name="email[]" value="<?php echo e(old('email[1]')); ?>" required placeholder="Email Anggota 1"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>No. Whatsapp Anggota 1</label>
-                              <input class="form-control" type="text" name="no_hp[]" value="<?php echo e(old('no_hp[1]')); ?>" required placeholder="No. Whatsapp Anggota 1"></div>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top: 30px;">
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Nama Anggota 2</label>
-                              <input class="form-control" type="text" name="nama[]" value="<?php echo e(old('nama[2]')); ?>" placeholder="Nama Anggota 2"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>NIM Anggota 2</label>
-                              <input class="form-control" type="number" name="nim[]" value="<?php echo e(old('nim[2]')); ?>" placeholder="NIM Anggota 2"></div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>Email Anggota 2</label>
-                              <input class="form-control" type="email" name="email[]" value="<?php echo e(old('email[2]')); ?>" placeholder="Email Anggota 2"></div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                              <label>No. Whatsapp Anggota 2</label>
-                              <input class="form-control" type="text" name="no_hp[]" value="<?php echo e(old('no_hp[2]')); ?>" placeholder="No. Whatsapp Anggota 2"></div>
-                        </div>
-                    </div>
-                </div>
-              	<i style="color: white;">(kosongi anggota 2 jika hanya mendaftarkan 2 peserta)</i>
-                <div class="text-center" ><button class="btn btn-success" id="reg-submit" type="submit">Daftar</button></div>
-            </form>
-        </div>
+    </section>
+</div>
 <?php $__env->stopSection(); ?>
+
 
 <?php echo $__env->make('layouts.base', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\WEB IDLE 2026\idle_2026\resources\views/pages/kompetisi/cpc.blade.php ENDPATH**/ ?>

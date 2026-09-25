@@ -85,9 +85,9 @@ class KompetisiPenyisihan1 extends Controller
             if ($count <= 1) {
                 if ($mahasiswa["nim"] == null) {
                     return redirect()->back()->with('error', 'Gagal mendaftar, karena NIM belum diisi');
-                } else if (preg_match("/[12][089123]241010[1-3][01][0-9]{2}/", $mahasiswa["nim"]) == 0) {
+                } else if (preg_match("/^[0-9]{12,13}$/", $mahasiswa["nim"]) == 0) {
                     return redirect()->back()->with('error', 'Gagal mendaftar, karena NIM tidak sesuai');
-                } else if (preg_match("/[12][089123]241010[1-3][01][0-9]{2}@?(mail.unej.ac.id$)/", $mahasiswa["email"]) == 0) {
+                } else if (preg_match("/^[a-zA-Z0-9._%+\-]+@mail\.unej\.ac\.id$/", $mahasiswa["email"]) == 0) {
                     return redirect()->back()->with('error', 'Gagal mendaftar, karena Email bukan email unej');
                 } else {
                     $mhs = Mahasiswa::createMahasiswa($mahasiswa["nim"], $mahasiswa["nama"], $mahasiswa["email"], $mahasiswa["no_hp"]);
@@ -97,7 +97,7 @@ class KompetisiPenyisihan1 extends Controller
             } else {
                 if ($mahasiswa["nama"] == null && $mahasiswa["nim"] == null && $mahasiswa["email"] == null && $mahasiswa["no_hp"] == null) {
                     continue;
-                } else if (preg_match("/[12][089123]241010[1-3][01][0-9]{2}/", $mahasiswa["nim"]) == 0) {
+                } else if (preg_match("/^[0-9]{12,13}$/", $mahasiswa["nim"]) == 0) {
                     return redirect()->back()->with('error', 'Gagal mendaftar, karena NIM tidak sesuai');
                 } else {
                     $mhs = Mahasiswa::createMahasiswa($mahasiswa["nim"], $mahasiswa["nama"], $mahasiswa["email"], $mahasiswa["no_hp"]);
@@ -113,19 +113,26 @@ class KompetisiPenyisihan1 extends Controller
             Peserta::linkPesertaToTim($peserta->nim, $tim->id);
         }
 
-        $mailer = app()->make(\Snowfire\Beautymail\Beautymail::class);
-        $kode = $tim->submissionid;
-        foreach ($mahasiswas as $mahasiswa) {
-            if ($mahasiswa["nim"] == null) {
-                continue;
+        try {
+            $mailer = app()->make(\Snowfire\Beautymail\Beautymail::class);
+            $kode = $tim->submissionid;
+            foreach ($mahasiswas as $mahasiswa) {
+                // Skip jika NIM atau email kosong/null
+                if (empty($mahasiswa["nim"]) || empty($mahasiswa["email"])) {
+                    continue;
+                }
+                $email = trim($mahasiswa["email"]);
+                $mailer->send('mails.daftar', compact('tim', 'kategori', 'kode'), function ($message) use ($email, $kategori) {
+                    $message
+                        ->from(config('mail.from.address'), config('mail.from.name'))
+                        ->to($email)
+                        ->subject('Pendaftaran IDLe');
+                });
+                \Log::info('Email pendaftaran berhasil dikirim ke: ' . $email . ' untuk tim: ' . $tim->nama_tim);
             }
-            $email = $mahasiswa["email"];
-            $mailer->send('mails.daftar', compact('tim', 'kategori', 'kode'), function ($message) use ($email, $kategori) {
-                $message
-                    ->from('_mainaccount@idlefasilkom.blog')
-                    ->to($email)
-                    ->subject('Pendaftaran IDLe');
-            });
+        } catch (\Exception $e) {
+            \Log::error('Gagal kirim email pendaftaran untuk tim [' . ($tim->nama_tim ?? '-') . ']: ' . $e->getMessage());
+            \Log::error($e->getTraceAsString());
         }
 
         // TODO : return redirect with success
