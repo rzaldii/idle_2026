@@ -520,62 +520,98 @@
                         <label>Nama Tim <span class="text-danger">*</span></label>
                         <input type="text" id="nama_tim" name="nama_tim" value="{{ old('nama_tim') }}" required placeholder="Masukkan nama tim">
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                          <label>NIM Ketua</label>
-                          <input class="form-control" type="number" name="nim[]" value="{{ old('nim[0]') }}" required placeholder="NIM Ketua"></div>
+
+                    <!-- KETUA TIM -->
+                    <div class="cpc-member-card">
+                        <div class="cpc-member-header">
+                            <div>
+                                <h3 class="cpc-member-title">Data Ketua Tim</h3>
+                                <span class="cpc-member-subtitle">Penanggung jawab utama dan kontak tim</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 cpc-field">
+                                <label>Nama Lengkap <span class="text-danger">*</span></label>
+                                <input type="text" name="nama[]" value="{{ old('nama.0') }}" required placeholder="Nama lengkap ketua">
+                            </div>
+                            <div class="col-md-6 cpc-field">
+                                <label>NIM <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="number" name="nim[]" value="{{ old('nim.0') }}" required placeholder="NIM UNEJ">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-md-0">
+                                <label>Email UNEJ <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="email" name="email[]" value="{{ old('email.0') }}" required placeholder="nim@mail.unej.ac.id">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-0">
+                                <label>No. WhatsApp <span class="text-danger">*</span></label>
+                                <input type="text" name="no_hp[]" value="{{ old('no_hp.0') }}" required placeholder="08xxxxxxxxxx">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Email Ketua</label>
-                          <input class="form-control" type="email" name="email[]" value="{{ old('email[0]') }}" required placeholder="Email Ketua"></div>
+
+                    <!-- ANGGOTA 1 -->
+                    <div class="cpc-member-card">
+                        <div class="cpc-member-header">
+                            <div>
+                                <h3 class="cpc-member-title">Data Anggota 1</h3>
+                                <span class="cpc-member-subtitle">Anggota tim inti</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 cpc-field">
+                                <label>Nama Lengkap <span class="text-danger">*</span></label>
+                                <input type="text" name="nama[]" value="{{ old('nama.1') }}" required placeholder="Nama lengkap anggota 1">
+                            </div>
+                            <div class="col-md-6 cpc-field">
+                                <label>NIM <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="number" name="nim[]" value="{{ old('nim.1') }}" required placeholder="NIM UNEJ">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-md-0">
+                                <label>Email UNEJ <span class="text-danger">*</span></label>
+                                <input class="font-mono" type="email" name="email[]" value="{{ old('email.1') }}" required placeholder="nim@mail.unej.ac.id">
+                            </div>
+                            <div class="col-md-6 cpc-field mb-0">
+                                <label>No. WhatsApp <span class="text-danger">*</span></label>
+                                <input type="text" name="no_hp[]" value="{{ old('no_hp.1') }}" required placeholder="08xxxxxxxxxx">
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                          <label>No. Whatsapp Ketua</label>
-                          <input class="form-control" type="text" name="no_hp[]" value="{{ old('no_hp[0]') }}" required placeholder="No. Whatsapp Ketua"></div>
-                    </div>
-                </div>
-            </div>
-            <div style="margin-top: 30px;">
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Nama Anggota 1</label>
-                          <input class="form-control" type="text" name="nama[]" value="{{ old('nama[1]') }}" required placeholder="Nama Anggota 1"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                          <label>NIM Anggota 1</label>
-                          <input class="form-control" type="number" name="nim[]" value="{{ old('nim[1]') }}" required placeholder="NIM Anggota 1"></div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Email Anggota 1</label>
-                          <input class="form-control" type="email" name="email[]" value="{{ old('email[1]') }}" required placeholder="Email Anggota 1"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                          <label>No. Whatsapp Anggota 1</label>
-                          <input class="form-control" type="text" name="no_hp[]" value="{{ old('no_hp[1]') }}" required placeholder="No. Whatsapp Anggota 1"></div>
-                    </div>
-                </div>
-            </div>
-            <div style="margin-top: 30px;">
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                          <label>Nama Anggota 2</label>
-                          <input class="form-control" type="text" name="nama[]" value="{{ old('nama[2]') }}" placeholder="Nama Anggota 2"></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                          <label>NIM Anggota 2</label>
-                          <input class="form-control" type="number" name="nim[]" value="{{ old('nim[2]') }}" placeholder="NIM Anggota 2"></div>
+
+                    @php
+                        $hasAnggota3 = old('nama.2') || old('nim.2') || old('email.2') || old('no_hp.2');
+                    @endphp
+
+                    <!-- ANGGOTA 2 (SLOT ANGGOTA KETIGA) -->
+                    <div id="wrapper-anggota-3" style="{{ $hasAnggota3 ? '' : 'display: none;' }}">
+                        <div class="cpc-member-card cpc-member-card-secondary">
+                            <div class="cpc-member-header">
+                                <div>
+                                    <h3 class="cpc-member-title">Data Anggota 2</h3>
+                                    <span class="cpc-member-subtitle">Anggota tambahan untuk tim yang beranggotakan 3 orang</span>
+                                </div>
+                                <button type="button" class="cpc-btn-remove-slot" id="btn-remove-member" title="Batalkan penambahan anggota ketiga">
+                                    <i class="fa fa-times-circle"></i> Batal / Hapus
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 cpc-field">
+                                    <label>Nama Lengkap</label>
+                                    <input type="text" name="nama[]" value="{{ old('nama.2') }}" placeholder="Nama lengkap anggota 2">
+                                </div>
+                                <div class="col-md-6 cpc-field">
+                                    <label>NIM</label>
+                                    <input class="font-mono" type="number" name="nim[]" value="{{ old('nim.2') }}" placeholder="NIM UNEJ">
+                                </div>
+                                <div class="col-md-6 cpc-field mb-md-0">
+                                    <label>Email UNEJ</label>
+                                    <input class="font-mono" type="email" name="email[]" value="{{ old('email.2') }}" placeholder="nim@mail.unej.ac.id">
+                                </div>
+                                <div class="col-md-6 cpc-field mb-0">
+                                    <label>No. WhatsApp</label>
+                                    <input type="text" name="no_hp[]" value="{{ old('no_hp.2') }}" placeholder="08xxxxxxxxxx">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- TRIGGER TAMBAH ANGGOTA KETIGA -->
