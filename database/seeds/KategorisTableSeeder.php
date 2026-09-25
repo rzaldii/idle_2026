@@ -21,11 +21,17 @@ class KategorisTableSeeder extends Seeder
 
                 'Himatif' => [
                     ['UI/UX', 'uiux'],
+                    ['Game Development', 'game-dev'],
+                    ['Animasi', 'animasi'],
                     ['IOT', 'iot']
                 ],
 
-                'Laos' => [
+                'Hmif' => [
                     ['CPC', 'cpc'],
+                    ['KTI', 'kti'],
+                ],
+
+                'Laos' => [
                     ['CTF', 'ctf']
                 ]
             ];
