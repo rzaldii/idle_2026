@@ -1244,3 +1244,66 @@ h1, h2, h3, h4, h5, h6,
         transform: none !important;
     }
 }
+
+/* ==========================================================================
+   Section 6.1 & 6.7: Navbar & Footer Adjustments
+   ========================================================================== */
+
+/* Nav Links */
+.navbar .nav-link {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--color-text-secondary) !important;
+    position: relative;
+    transition: color 0.3s ease;
+    padding-bottom: 4px;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: var(--color-cyan-500) !important;
+}
+.navbar .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-cyan-500);
+    transition: width 0.3s ease;
+}
+.navbar .nav-link:hover::before,
+.navbar .nav-link.active::before {
+    width: 100%;
+}
+
+/* Dropdown */
+.navbar .dropdown-menu {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--color-border);
+}
+.navbar .dropdown-item {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.navbar .dropdown-item:hover {
+    background: var(--color-bg-section-alt);
+    color: var(--color-cyan-600);
+}
+
+.footer-idle h3 {
+    font-family: var(--font-display);
+}
+.footer-idle a {
+    font-family: var(--font-body);
+}
+.footer-idle .copyright {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+}

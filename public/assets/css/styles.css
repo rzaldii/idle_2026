@@ -457,30 +457,7 @@ body{
   padding-top: 85px;
 }
 
-#navcol-1 a {
-  text-decoration: none;
-  text-align: center;
-  display: block;
-  position: relative;
-  transition: all 0.3s ease;
-}
-#navcol-1 a:hover {
-  color: var(--primer);
-}
-#navcol-1 a::before {
-  content: "";
-  transition: all 0.4s ease-in-out;
-  position: absolute;
-  right: 100%;
-  left: 0%;
-  bottom: 0;
-  height: 2px;
-  background-color: var(--primer);
-}
-#navcol-1 a:hover::before {
-  right: 0;
-  left: 0;
-}
+/* Legacy navcol-1 styles removed to avoid conflict with idle-design-system.css */
 
 .page_title{
   font-family: Nunito;
