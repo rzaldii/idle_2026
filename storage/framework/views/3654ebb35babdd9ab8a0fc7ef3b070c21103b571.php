@@ -37,8 +37,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
 
     <!-- Main Stylesheet File -->
-    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('assets/css/idle-design-system.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/styles.css')); ?>?v=<?php echo e(filemtime(public_path('assets/css/styles.css'))); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('assets/css/idle-design-system.css')); ?>?v=<?php echo e(filemtime(public_path('assets/css/idle-design-system.css'))); ?>">
     <style>
       html {
         scroll-behavior: smooth;

@@ -38,7 +38,12 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/config-cache', function() {
     Artisan::call('config:cache');
     return 'Config cache has been cleared';
-}); 
+});
+
+Route::get('/migrate', function() {
+    Artisan::call('migrate', ['--force' => true]);
+    return nl2br(Artisan::output() ?: 'Migration executed successfully.');
+});
 
 Route::get('/', 'HomeController@index')->name('home');
 
