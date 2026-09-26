@@ -40,56 +40,68 @@ class SubmissionController extends Controller
             abort(404);
         }
 
-        // Validasi file
-        $val_data = $request->validate([
-            'file' => 'required|file|max:5120|mimes:pdf,zip,rar', // max 5MB
-            'judul' => 'required|string|max:255',
-        ]);
-
-        // Tentukan folder berdasarkan babak
+        // Tentukan folder dan proses berdasarkan babak
         if ($tim->babak == 1) {
-            $folder = "submission-1";
-            $file = $request->file('file');
-            $filename = basename($file->getClientOriginalName()); // hanya nama file, bersih dari "/"
-            $path = $file->storeAs($folder, $filename); // simpan file
+            $request->validate([
+                'file' => 'required|file|max:5120|mimes:pdf,zip,rar', // max 5MB
+                'judul' => 'required|string|max:255',
+            ]);
 
             $sub = Submission::createSubmissionPenyisihan1(
                 $tim->id,
                 $request->judul,
-                $folder,    // simpan folder saja
+                "submission-1",
                 $token,
-                $filename   // nama file murni
+                $request->file('file')
             );
         } elseif ($tim->babak == 2) {
-            $folder = "submission-2";
-            $file = $request->file('file');
-            $filename = $file ? basename($file->getClientOriginalName()) : null;
+            if ($tim->id_kategori == 2) {
+                $request->validate([
+                    'judul' => 'required|string|max:255',
+                    'link' => 'required|string|max:255',
+                    'link2' => 'required|string|max:255',
+                ]);
 
-            $data = json_encode(['link' => $request->link]);
-            $sub = Submission::createSubmissionPenyisihan2(
-                $tim->id,
-                $request->judul,
-                $folder,
-                $data,
-                $token,
-                $filename
-            );
+                $data = json_encode(['link' => $request->link]);
+                $path = json_encode(['link2' => $request->link2]);
 
-            if ($file) {
-                $file->storeAs($folder, $filename);
+                $sub = Submission::createSubmissionPenyisihan2(
+                    $tim->id,
+                    $request->judul,
+                    $path,
+                    $data,
+                    $token
+                );
+            } else {
+                $request->validate([
+                    'file' => 'required|file|max:5120|mimes:pdf,zip,rar',
+                    'judul' => 'required|string|max:255',
+                    'link' => 'nullable|string|max:255',
+                ]);
+
+                $data = json_encode(['link' => $request->link]);
+
+                $sub = Submission::createSubmissionPenyisihan2(
+                    $tim->id,
+                    $request->judul,
+                    "submission-2",
+                    $data,
+                    $token,
+                    $request->file('file')
+                );
             }
         } else { // final
-            $folder = "submission-final";
-            $file = $request->file('file');
-            $filename = basename($file->getClientOriginalName());
-            $path = $file->storeAs($folder, $filename);
+            $request->validate([
+                'file' => 'required|file|max:5120|mimes:pdf,zip,rar',
+                'judul' => 'required|string|max:255',
+            ]);
 
             $sub = Submission::createSubmissionFinal(
                 $tim->id,
                 $request->judul,
-                $folder,
+                "submission-final",
                 $token,
-                $filename
+                $request->file('file')
             );
         }
 

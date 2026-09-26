@@ -25,7 +25,11 @@ class Submission extends Model
 
     public static function createSubmissionPenyisihan1($id_tim, $judul, $path, $token, $file){
 
-        $upload = Storage::disk('public_uploads')->put($path, $file);
+        if ($file instanceof \Illuminate\Http\UploadedFile) {
+            $upload = Storage::disk('public_uploads')->putFile($path, $file);
+        } else {
+            $upload = $file;
+        }
 
         if(!$upload){
             return false;
@@ -55,7 +59,11 @@ class Submission extends Model
             
             return $submission;
         } else {
-            $upload = Storage::disk('public_uploads')->put($path, $file);
+            if ($file instanceof \Illuminate\Http\UploadedFile) {
+                $upload = Storage::disk('public_uploads')->putFile($path, $file);
+            } else {
+                $upload = $file;
+            }
 
             if(!$upload){
                 return false;
@@ -71,16 +79,15 @@ class Submission extends Model
     
             return $submission;
         }
-        
-        
-        
-        
-
     }
 
     public static function createSubmissionFinal($id_tim, $judul, $path, $token, $file){
 
-        $upload = Storage::disk('public_uploads')->put($path, $file);
+        if ($file instanceof \Illuminate\Http\UploadedFile) {
+            $upload = Storage::disk('public_uploads')->putFile($path, $file);
+        } else {
+            $upload = $file;
+        }
 
         if(!$upload) {
             return false;
