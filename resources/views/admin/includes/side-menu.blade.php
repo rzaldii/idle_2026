@@ -25,7 +25,7 @@
             </ul>
         </li>
         
-        @if ($kategori->id_ormawa == 1 || $kategori->id_ormawa == 3 )
+        @if (\Illuminate\Support\Facades\Auth::user()->id_ormawa == 1 || \Illuminate\Support\Facades\Auth::user()->id_ormawa == 2 || \Illuminate\Support\Facades\Auth::user()->id_ormawa == 3 || \Illuminate\Support\Facades\Auth::user()->id_ormawa == 4)
             <div></div>
         @else
             <li class="treeview {{ request()->is('admin/penyisihan-2/*') ? 'is-expanded' : '' }}"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Kompetisi (Penyisihan 2)</span><i class="treeview-indicator fa fa-angle-right"></i></a>

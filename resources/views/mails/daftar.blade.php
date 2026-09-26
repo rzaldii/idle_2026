@@ -36,34 +36,22 @@
         	'title' => 'Submit',
         	'link' => route('kompetisi.submit.index', ['kategori' => $kategori->kategori, 'token' => $kode])])
 
-            @if ($kategori->kategori == 'data-mining')
+            @if ($kategori->id_ormawa == 2 || in_array($kategori->kategori, ['uiux', 'iot', 'game', 'gamedev', 'game-dev', 'animasi', 'data-mining']))
                 @include('beautymail::templates.sunny.contentStart')
-                <p> Link Grup Wa :
-                    <a href="https://bit.ly/GrupPesertaITeC">Grup WA Peserta ITeC</a>
+                <p> Link Grup WhatsApp :
+                    <a href="https://bit.ly/GrupPesertaITEC2026">Grup WA Peserta ITeC 2026</a>
                 </p>
                 @include('beautymail::templates.sunny.contentEnd')
                 
                 @include('beautymail::templates.sunny.contentStart')
-                <p>atau akses link berikut :
-                    <a href="{{ route('kompetisi.submit.index', ['kategori' => $kategori->kategori, 'token' => $kode]) }}">{{ route('kompetisi.submit.index', ['kategori' => $kategori->kategori, 'token' => $kode]) }}</a>
-                </p>
-                @include('beautymail::templates.sunny.contentEnd')
-            @elseif ($kategori->kategori == 'uiux')
-                @include('beautymail::templates.sunny.contentStart')
-                <p> Link Grup Wa :
-                    <a href="https://bit.ly/GrupPesertaITeC">Grup WA Peserta ITeC</a>
-                </p>
-                @include('beautymail::templates.sunny.contentEnd')
-                
-                @include('beautymail::templates.sunny.contentStart')
-                <p>atau akses link berikut :
-                    <a href="{{ route('kompetisi.submit.index', ['kategori' => $kategori->kategori, 'token' => $kode]) }}">{{ route('kompetisi.submit.index', ['kategori' => $kategori->kategori, 'token' => $kode]) }}</a>
+                <p>atau akses link submit berikut :
+                    <a href="{{ route('kompetisi.submit.index', ['token' => $kode]) }}">{{ route('kompetisi.submit.index', ['token' => $kode]) }}</a>
                 </p>
                 @include('beautymail::templates.sunny.contentEnd')
             @else
                 @include('beautymail::templates.sunny.contentStart')
-                <p>atau akses link berikut :
-                    <a href="{{ route('kompetisi.submit.index', ['kategori' => $kategori->kategori, 'token' => $kode]) }}">{{ route('kompetisi.submit.index', ['kategori' => $kategori->kategori, 'token' => $kode]) }}</a>
+                <p>atau akses link submit berikut :
+                    <a href="{{ route('kompetisi.submit.index', ['token' => $kode]) }}">{{ route('kompetisi.submit.index', ['token' => $kode]) }}</a>
                 </p>
                 @include('beautymail::templates.sunny.contentEnd')
             @endif
