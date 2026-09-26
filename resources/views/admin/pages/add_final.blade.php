@@ -29,7 +29,7 @@
                 <div class="tile-body">
                     <form action="{{ route('admin.final.store', ['kategori' => $kategori->kategori ]) }}" method="post">
                         @csrf
-                        <p>Silahkan masukan nama tim yang masuk ke babak 2</p>
+                        <p>Silahkan pilih nama tim yang lolos ke babak Final</p>
                         <h4>Nama Tim</h4>
 
                         <select class="form-control" id="demoSelect" multiple="" name="tims[]">

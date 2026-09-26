@@ -33,7 +33,7 @@ class KompetisiFinal extends Controller
     {
         // TODO : Return view create
         $kategori = Kategori::where('kategori', $id_kategori)->get()->first();
-        if ($kategori->id_ormawa == 1 || $kategori->id_ormawa == 3 || $kategori->kategori == 'data-mining'){
+        if ($kategori->id_ormawa == 1 || $kategori->id_ormawa == 2 || $kategori->id_ormawa == 3 || $kategori->id_ormawa == 4 || $kategori->kategori == 'data-mining'){
             $tims = Tim::where('id_kategori', $kategori->id)->where('babak', '=', 1)->get();
         } else {
             $tims = Tim::where('id_kategori', $kategori->id)->where('babak', '=', 2)->get();
