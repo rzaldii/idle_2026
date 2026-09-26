@@ -223,14 +223,26 @@ class AjaxController extends Controller
 
     public function getNilai($id, $babak)
     {
-        return Penilaian::select('nilai')
+        if (!$id || $id == -1) {
+            return '';
+        }
+
+        $penilaian = Penilaian::select('nilai')
             ->where('id_tim', $id)
             ->where('babak', $babak)
-            ->get()->first()->nilai;
+            ->first();
+
+        return $penilaian ? (string)$penilaian->nilai : '';
     }
 
     public function setNilai(Request $request)
     {
+        $request->validate([
+            'tim' => 'required|numeric|min:1',
+            'nilai' => 'required|numeric|min:0|max:100',
+            'babak' => 'required|numeric|min:1'
+        ]);
+
         $id = $request->tim;
         $nilai = $request->nilai;
         $babak = $request->babak;

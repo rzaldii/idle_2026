@@ -63,6 +63,10 @@
 @section('js')
     <script>
         $('#tim-select').change(function () {
+            if (this.value == -1 || this.value == '') {
+                $('#nilai').val('');
+                return;
+            }
             $.ajax({
                 type: 'GET',
                 url: '/admin/ajax/nilai/' + this.value + '/' + $('#babak-value').val(),
@@ -75,29 +79,42 @@
             });
         });
 
-        $('#submit-btn').click(function (xhr, textStatus, errorThrown) {
+        $('#submit-btn').click(function () {
+            var selectedTim = $('#tim-select').val();
+            var inputNilai = $('#nilai').val();
+
+            if (selectedTim == -1 || selectedTim == '') {
+                errorNotification('Error', 'Silakan pilih tim terlebih dahulu');
+                return;
+            }
+
+            if (inputNilai === '' || isNaN(inputNilai)) {
+                errorNotification('Error', 'Silakan masukkan nilai yang valid');
+                return;
+            }
+
             $.ajax({
                 type: 'POST',
                 url: '/admin/ajax/nilai',
                 data: $('#nilai-form').serialize(),
                 success: function(data){
-                    if(data == true){
+                    if(data == true || data == 1){
                         successNotification('Success', 'Data berhasil ditambahkan');
                     } else {
-                        errorNotification('Failed', 'Something Error');
+                        errorNotification('Failed', 'Gagal menyimpan nilai');
                     }
 
-                    $('#tim-select').val(-1)
+                    $('#tim-select').val(-1);
                     $('#nilai').val('');
                 },
-                error: function(a, b, c){
-                    errorNotification('Error', 'Something Error');
-
-                    $('#tim-select').val(-1)
-                    $('#nilai').val('');
+                error: function(xhr, status, error){
+                    var message = 'Something Error';
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        message = xhr.responseJSON.message;
+                    }
+                    errorNotification('Error', message);
                 }
             });
-            console.log();
         });
     </script>
 @endsection
