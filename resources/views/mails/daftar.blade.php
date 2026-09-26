@@ -34,7 +34,7 @@
         @include('beautymail::templates.sunny.contentEnd')
         @include('beautymail::templates.sunny.button', [
         	'title' => 'Submit',
-        	'link' => route('kompetisi.submit.index', ['kategori' => $kategori->kategori, 'token' => $kode])])
+        	'link' => route('kompetisi.submit.index', ['token' => $kode])])
 
             @if ($kategori->id_ormawa == 2 || in_array($kategori->kategori, ['uiux', 'iot', 'game', 'gamedev', 'game-dev', 'animasi', 'data-mining']))
                 @include('beautymail::templates.sunny.contentStart')
