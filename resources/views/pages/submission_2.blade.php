@@ -90,14 +90,14 @@
                                <label for="" style="float: left;">Silahkan masukan file (PDF)</label>
                                <input type="file" name="file" class="form-control" id="contact-name" placeholder="File" required>
                            </div>
-                            <small style="color:red">Pastikan ukuran file tidak lebih dari 5 Mb.</small>
+                            <small style="color:red">Pastikan ukuran file tidak lebih dari 10 Mb.</small>
 
                            @else
                            <div class="form-group">
                                <label for="" style="float: left;">Silahkan masukan file (ZIP)</label>
                                <input type="file" name="file" class="form-control" id="contact-name" placeholder="File" required>
                            </div>
-                          <small style="color:red">Pastikan ukuran file tidak lebih dari 5 Mb.</small>
+                           <small style="color:red">Pastikan ukuran file tidak lebih dari 10 Mb.</small>
                            @endif
 
 

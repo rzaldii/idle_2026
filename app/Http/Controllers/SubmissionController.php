@@ -43,7 +43,7 @@ class SubmissionController extends Controller
         // Tentukan folder dan proses berdasarkan babak
         if ($tim->babak == 1) {
             $request->validate([
-                'file' => 'required|file|max:5120|mimes:pdf,zip,rar', // max 5MB
+                'file' => 'required|file|max:11263|mimes:pdf,zip,rar', // max ~10.9MB (< 11MB)
                 'judul' => 'required|string|max:255',
             ]);
 
@@ -74,7 +74,7 @@ class SubmissionController extends Controller
                 );
             } else {
                 $request->validate([
-                    'file' => 'required|file|max:5120|mimes:pdf,zip,rar',
+                    'file' => 'required|file|max:11263|mimes:pdf,zip,rar',
                     'judul' => 'required|string|max:255',
                     'link' => 'nullable|string|max:255',
                 ]);
@@ -92,7 +92,7 @@ class SubmissionController extends Controller
             }
         } else { // final
             $request->validate([
-                'file' => 'required|file|max:5120|mimes:pdf,zip,rar',
+                'file' => 'required|file|max:11263|mimes:pdf,zip,rar',
                 'judul' => 'required|string|max:255',
             ]);
 
