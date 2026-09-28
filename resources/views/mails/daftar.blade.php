@@ -39,7 +39,7 @@
             @if ($kategori->id_ormawa == 2 || in_array($kategori->kategori, ['uiux', 'iot', 'game', 'gamedev', 'game-dev', 'animasi', 'data-mining']))
                 @include('beautymail::templates.sunny.contentStart')
                 <p> Link Grup WhatsApp :
-                    <a href="https://bit.ly/GrupPesertaITEC2026">Grup WA Peserta ITeC 2026</a>
+                    <a href="https://bit.ly/GrupPesertaITEC2026">bit.ly/GrupPesertaITEC2026</a>
                 </p>
                 @include('beautymail::templates.sunny.contentEnd')
                 
