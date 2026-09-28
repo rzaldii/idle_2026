@@ -38,15 +38,21 @@ class MailController extends Controller
     {
         $text = $request->pesan;
         $mailer = app()->make(\Snowfire\Beautymail\Beautymail::class);
-        $emails = $request->emails;
+        $emails = $request->emails ?? [];
         foreach ($emails as $email) {
-            $nama = Mahasiswa::where('email', $email)->get()->first()->nama;
-            $mailer->send('mails.send', compact('text', 'nama'), function ($message) use ($email) {
-                $message
-                    ->from(Auth::user()->name . '@idle-unej.my.id')
-                    ->to($email)
-                    ->subject('Pesan dari IDLe');
-            });
+            $mhs = Mahasiswa::where('email', $email)->first();
+            $nama = $mhs ? $mhs->nama : 'Peserta';
+            try {
+                $mailer->send('mails.send', compact('text', 'nama'), function ($message) use ($email) {
+                    $message
+                        ->from(config('mail.from.address'), config('mail.from.name'))
+                        ->to($email)
+                        ->subject('Pesan dari IDLe');
+                });
+                \Log::info('Email broadcast berhasil dikirim ke mahasiswa: ' . $email);
+            } catch (\Exception $e) {
+                \Log::error('Gagal kirim email mahasiswa ke ' . $email . ': ' . $e->getMessage());
+            }
         }
         return redirect()->route('admin.mail.page')->with('success', 'Pesan berhasil dikirim');
     }
@@ -55,18 +61,29 @@ class MailController extends Controller
     {
         $mailer = app()->make(\Snowfire\Beautymail\Beautymail::class);
         $text = $request->pesan;
-        foreach ($request->tims as $t) {
-            $tim = Tim::with('pesertas.mahasiswa')
-                ->findOrFail($t);
+        $tims = $request->tims ?? [];
+        foreach ($tims as $t) {
+            $tim = Tim::with('pesertas.mahasiswa')->find($t);
+            if (!$tim) {
+                continue;
+            }
             foreach ($tim->pesertas as $peserta) {
+                if (!$peserta->mahasiswa || empty($peserta->mahasiswa->email)) {
+                    continue;
+                }
                 $nama = $peserta->mahasiswa->nama;
-                $email = $peserta->mahasiswa->email;
-                $mailer->send('mails.send', compact('text', 'nama'), function ($message) use ($email) {
-                    $message
-                        ->from(strtolower(Auth::user()->name) . '@idle-unej.my.id')
-                        ->to($email)
-                        ->subject('Pesan dari IDLe');
-                });
+                $email = trim($peserta->mahasiswa->email);
+                try {
+                    $mailer->send('mails.send', compact('text', 'nama'), function ($message) use ($email) {
+                        $message
+                            ->from(config('mail.from.address'), config('mail.from.name'))
+                            ->to($email)
+                            ->subject('Pesan dari IDLe');
+                    });
+                    \Log::info('Email broadcast berhasil dikirim ke tim ' . $tim->nama_tim . ' (' . $email . ')');
+                } catch (\Exception $e) {
+                    \Log::error('Gagal kirim email tim ke ' . $email . ': ' . $e->getMessage());
+                }
             }
         }
         return redirect()->route('admin.mail.page')->with('success', 'Pesan berhasil dikirim');

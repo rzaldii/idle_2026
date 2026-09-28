@@ -46,27 +46,49 @@ class KompetisiPenyisihan2 extends Controller
     public function store($id_kategori, Request $request)
     {
         $tims = $request->tims;
+        if (empty($tims)) {
+            return redirect()->back()->with('error', 'Pilih setidaknya satu tim untuk masuk ke babak 2.');
+        }
+
         $tahap = "tahap 2";
-        $kategori = Kategori::where('kategori', $id_kategori)->get()->first();
+        $kategori = Kategori::where('kategori', $id_kategori)->first();
+        if (!$kategori) {
+            return redirect()->back()->with('error', 'Kategori tidak ditemukan.');
+        }
+
         $mailer = app()->make(\Snowfire\Beautymail\Beautymail::class);
-        foreach($tims as $tim){
+
+        foreach ($tims as $tim) {
             Tim::updateKompetisi($tim, 2);
             $tim_ = Tim::with('pesertas.mahasiswa')->find($tim);
+            if (!$tim_) {
+                continue;
+            }
+
             $kode = $tim_->submissionid;
             $nama = $tim_->nama_tim;
-            foreach ($tim_->pesertas as $peserta){
-                $email = $peserta->mahasiswa->email;
-                $mailer->send('mails.lolos', compact('tahap', 'tim_', 'kategori', 'nama', 'kode'), function ($message) use ($email) {
-                    $message
-                        ->from('_mainaccount@idlefasilkom.blog')
-                        ->to($email)
-                        ->subject('Pengumuman Babak 2');
-                });
+
+            foreach ($tim_->pesertas as $peserta) {
+                if (!$peserta->mahasiswa || empty($peserta->mahasiswa->email)) {
+                    continue;
+                }
+
+                $email = trim($peserta->mahasiswa->email);
+                try {
+                    $mailer->send('mails.lolos', compact('tahap', 'tim_', 'kategori', 'nama', 'kode'), function ($message) use ($email, $kategori) {
+                        $message
+                            ->from(config('mail.from.address'), config('mail.from.name'))
+                            ->to($email)
+                            ->subject('Pengumuman Babak 2 - ' . $kategori->nama_kategori);
+                    });
+                    \Log::info('Email pengumuman babak 2 berhasil dikirim ke: ' . $email . ' untuk tim: ' . $nama);
+                } catch (\Exception $e) {
+                    \Log::error('Gagal kirim email babak 2 untuk peserta ' . $email . ' (tim ' . $nama . '): ' . $e->getMessage());
+                }
             }
         }
 
-        // TODO : return redirect with success
-        return redirect()->route('admin.penyisihan-2.index', $id_kategori);
+        return redirect()->route('admin.penyisihan-2.index', $id_kategori)->with('success', 'Berhasil menambahkan peserta babak 2 dan mengirim email pengumuman.');
     }
 
     public function getSetNilaiPages()
