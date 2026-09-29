@@ -100,14 +100,46 @@ class AjaxController extends Controller
         return DataTables::of($data)->make(true);
     }
 
+    public function getPesertas()
+    {
+        $id_ormawa = Auth::user()->id_ormawa ?? null;
+        if ($id_ormawa) {
+            $kategoris = Kategori::where('id_ormawa', $id_ormawa)->get();
+        } else {
+            $kategoris = Kategori::get();
+        }
+
+        $pesertas = [];
+        $no = 1;
+        foreach ($kategoris as $kategori) {
+            $tims = Tim::with(['pesertas.mahasiswa', 'kategori'])
+                ->where('id_kategori', $kategori->id)
+                ->get();
+
+            foreach ($tims as $tim) {
+                foreach ($tim->pesertas as $peserta) {
+                    if (!$peserta->mahasiswa) {
+                        continue;
+                    }
+                    $item = new \stdClass();
+                    $item->no = $no++;
+                    $item->nim = $peserta->mahasiswa->nim;
+                    $item->nama = $peserta->mahasiswa->nama;
+                    $item->nama_tim = $tim->nama_tim;
+                    $item->email = $peserta->mahasiswa->email;
+                    $item->no_hp = $peserta->mahasiswa->no_hp;
+                    $item->id_tim = $tim->id;
+                    $pesertas[] = $item;
+                }
+            }
+        }
+
+        return DataTables::of($pesertas)->make(true);
+    }
+
     public function getMahasiswas()
     {
-        $data = Mahasiswa::get();
-        $no = 1;
-        foreach ($data as $d) {
-            $d->no = $no++;
-        }
-        return DataTables::of($data)->make(true);
+        return $this->getPesertas();
     }
 
     public function getTims()

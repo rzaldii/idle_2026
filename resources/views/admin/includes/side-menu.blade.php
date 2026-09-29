@@ -33,7 +33,7 @@
                     <li><a class="treeview-item {{ request()->is('final/set-nilai') ? 'active' : '' }}" href="{{ route('admin.final.set-nilai') }}"><i class="icon fa fa-trophy"></i>Set Nilai</a></li>
             </ul>
         </li>
-        <li><a class="app-menu__item {{ request()->is('admin/mahasiswa') ? 'active' : '' }}" href="{{ route('admin.mahasiswa.index') }}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Mahasiswa</span></a></li>
+        <li><a class="app-menu__item {{ request()->is('admin/peserta*') || request()->is('admin/mahasiswa*') ? 'active' : '' }}" href="{{ route('admin.peserta.index') }}"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Peserta</span></a></li>
         <li><a class="app-menu__item {{ request()->is('admin/tim') ? 'active' : '' }}" href="{{ route('admin.tim.index') }}"><i class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Tim</span></a></li>
         <li><a class="app-menu__item {{ request()->is('admin/mail') ? 'active' : '' }}" href="{{ route('admin.mail.page') }}"><i class="app-menu__icon fa fa-envelope"></i><span class="app-menu__label">Email</span></a></li>
 

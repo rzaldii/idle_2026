@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Exports\MahasiswaExport;
+use App\Exports\OrmawaPesertaExport;
 use App\Exports\PesertaExport;
 use App\Exports\TimExport;
 use App\Http\Controllers\Controller;
@@ -10,6 +11,7 @@ use App\Kategori;
 use App\Tim;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ExportExcelController extends Controller
@@ -33,7 +35,13 @@ class ExportExcelController extends Controller
         return Excel::download(new TimExport(), 'Tim Seluruh Lomba IDLe.xlsx');
     }
 
+    public function exportPesertas(){
+        $id_ormawa = Auth::user()->id_ormawa ?? null;
+        $nama_ormawa = Auth::user()->name ?? 'Ormawa';
+        return Excel::download(new OrmawaPesertaExport($id_ormawa), "Daftar Peserta $nama_ormawa IDLe.xlsx");
+    }
+
     public function exportMahasiswas(){
-        return Excel::download(new MahasiswaExport(), 'Mahasiswa Peserta IDLe.xlsx');
+        return $this->exportPesertas();
     }
 }
