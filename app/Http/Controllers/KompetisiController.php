@@ -58,7 +58,19 @@ class KompetisiController extends Controller
 
 
         $kategoris = Kategori::get();
-        $kategori = Kategori::where('kategori', $kategori)->get()->first();
+        $kat = Kategori::where('kategori', $kategori)->first();
+        if (!$kat) {
+            if ($kategori == 'game') {
+                $kat = Kategori::where('kategori', 'game-dev')->first();
+            } else if ($kategori == 'game-dev') {
+                $kat = Kategori::where('kategori', 'game')->first();
+            }
+        }
+
+        if (!$kat) {
+            return response()->view('errors.404_not_found');
+        }
+        $kategori = $kat;
 
         $babak = 1;
 
@@ -68,7 +80,9 @@ class KompetisiController extends Controller
             $babak = 3;
         }
 
-        $tims = Tim::with('nilais')->where('id_kategori', $kategori->id)->where('babak', $babak)
+        $tims = Tim::with(['nilais', 'mahasiswa', 'pesertas.mahasiswa', 'kategori'])
+            ->where('id_kategori', $kategori->id)
+            ->where('babak', $babak)
             ->paginate(20);
 
         foreach ($tims as $tim) {
