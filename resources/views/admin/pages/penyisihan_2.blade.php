@@ -104,7 +104,7 @@
                     {
                         data: 'mahasiswa',
                         render: function (data, type, row) {
-                            return "<a href='/admin/mahasiswa/" + data['nim'] + "'" + ">" + data['nama'] + "</a>"
+                            return "<a href='/admin/peserta/" + data['nim'] + "'" + ">" + data['nama'] + "</a>"
                         }
                     },
                     {
@@ -112,7 +112,7 @@
                         render: function (data, type, row) {
                             content = "";
                             for (var i = 0; i < data.length; i++) {
-                                content += "<a href='/admin/mahasiswa/" + data[i]['nim'] + "'" + ">" + data[i]['mahasiswa']['nama'] + "</a>";
+                                content += "<a href='/admin/peserta/" + data[i]['nim'] + "'" + ">" + data[i]['mahasiswa']['nama'] + "</a>";
 
                                 content = i != data.length - 1 ? content += ", " : content;
                             }

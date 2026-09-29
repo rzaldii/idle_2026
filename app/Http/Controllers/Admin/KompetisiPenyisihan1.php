@@ -62,6 +62,9 @@ class KompetisiPenyisihan1 extends Controller
     public function store($id_kategori, Request $request)
     {
         $kategori = Kategori::with('ormawa')->find($id_kategori);
+        if (!$kategori) {
+            $kategori = Kategori::with('ormawa')->where('kategori', $id_kategori)->first();
+        }
 
         $mahasiswas = [];
         for ($i = 0; $i < count($request->nama); $i++) {

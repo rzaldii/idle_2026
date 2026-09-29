@@ -78,6 +78,8 @@
                            </div>
                            @endif
                            
+                           <small style="color:red">Pastikan ukuran file tidak lebih dari 10 Mb.</small>
+
                            <div class="form-send">
                                <button type="submit" class="btn btn-success shadow">Submit</button>
                            </div>

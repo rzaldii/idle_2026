@@ -50,27 +50,49 @@ class KompetisiFinal extends Controller
     public function store($id_kategori, Request $request)
     {
         $tims = $request->tims;
+        if (empty($tims)) {
+            return redirect()->back()->with('error', 'Pilih setidaknya satu tim untuk masuk ke babak final.');
+        }
+
         $tahap = "final";
-        $kategori = Kategori::where('kategori', $id_kategori)->get()->first();
+        $kategori = Kategori::where('kategori', $id_kategori)->first();
+        if (!$kategori) {
+            return redirect()->back()->with('error', 'Kategori tidak ditemukan.');
+        }
+
         $mailer = app()->make(\Snowfire\Beautymail\Beautymail::class);
-        foreach($tims as $tim){
+
+        foreach ($tims as $tim) {
             Tim::updateKompetisi($tim, 3);
             $tim_ = Tim::with('pesertas.mahasiswa')->find($tim);
+            if (!$tim_) {
+                continue;
+            }
+
             $kode = $tim_->submissionid;
             $nama = $tim_->nama_tim;
-            foreach ($tim_->pesertas as $peserta){
-                $email = $peserta->mahasiswa->email;
-                $mailer->send('mails.lolos', compact('tahap', 'tim_', 'kategori', 'nama', 'kode'), function ($message) use ($email) {
-                    $message
-                        ->from('_mainaccount@idlefasilkom.blog')
-                        ->to($email)
-                        ->subject('Pengumuman Final');
-                });
+
+            foreach ($tim_->pesertas as $peserta) {
+                if (!$peserta->mahasiswa || empty($peserta->mahasiswa->email)) {
+                    continue;
+                }
+
+                $email = trim($peserta->mahasiswa->email);
+                try {
+                    $mailer->send('mails.lolos', compact('tahap', 'tim_', 'kategori', 'nama', 'kode'), function ($message) use ($email, $kategori) {
+                        $message
+                            ->from(config('mail.from.address'), config('mail.from.name'))
+                            ->to($email)
+                            ->subject('Pengumuman Final - ' . $kategori->nama_kategori);
+                    });
+                    \Log::info('Email pengumuman final berhasil dikirim ke: ' . $email . ' untuk tim: ' . $nama);
+                } catch (\Exception $e) {
+                    \Log::error('Gagal kirim email final untuk peserta ' . $email . ' (tim ' . $nama . '): ' . $e->getMessage());
+                }
             }
         }
 
-        // TODO : return redirect with success
-        return redirect()->route('admin.final.index', $id_kategori);
+        return redirect()->route('admin.final.index', $id_kategori)->with('success', 'Berhasil menambahkan peserta final dan mengirim email pengumuman.');
     }
 
     public function getSetNilaiPages()
@@ -133,10 +155,9 @@ class KompetisiFinal extends Controller
      */
     public function destroy($kategori, $id)
     {
-        $tim = Tim::updateKompetisi($id, 2);
-        if($tim){
-            return redirect()->route('admin.final.index', compact('kategori'));
-        }
-        return redirect()->route('admin.final.index', compact('kategori'));
+        $kat = Kategori::where('kategori', $kategori)->first();
+        $targetBabak = ($kat && ($kat->id_ormawa == 1 || $kat->id_ormawa == 2 || $kat->id_ormawa == 3 || $kat->id_ormawa == 4 || $kat->kategori == 'data-mining')) ? 1 : 2;
+        $tim = Tim::updateKompetisi($id, $targetBabak);
+        return redirect()->route('admin.final.index', compact('kategori'))->with('success', 'Tim berhasil diturunkan dari final.');
     }
 }

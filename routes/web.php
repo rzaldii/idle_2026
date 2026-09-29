@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\KompetisiFinal;
 use App\Http\Controllers\Admin\KompetisiPenyisihan1;
 use App\Http\Controllers\Admin\KompetisiPenyisihan2;
 use App\Http\Controllers\Admin\MahasiswaController;
+use App\Http\Controllers\Admin\PesertaController;
 use App\Http\Controllers\Admin\MailController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\PostImageController;
@@ -85,7 +86,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
     Route::get('chpwd', 'AdminController@ChangePassword')->name('chpwd');
     Route::post('chpwd', 'AdminController@PostPassword')->name('post.chpwd');
 
-    Route::resource('mahasiswa', 'MahasiswaController');
+    Route::resource('peserta', 'PesertaController')->parameters(['peserta' => 'peserta']);
+    Route::resource('mahasiswa', 'PesertaController')->parameters(['mahasiswa' => 'peserta']);
     Route::resource('tim', 'TimController');
     Route::post('tim/star/{tim}', 'TimController@tandai')->name('tim.tandai');
     Route::resource('post-image', 'PostImageController');
@@ -119,6 +121,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
     Route::get('ajax/penyisihan-1/{kategori}', 'AjaxController@getPenyisihan1Tim')->name('ajax.penyisihan1');
     Route::get('ajax/penyisihan-2/{kategori}', 'AjaxController@getPenyisihan2Tim')->name('ajax.penyisihan2');
     Route::get('ajax/final/{kategori}', 'AjaxController@getFinalTim')->name('ajax.final');
+    Route::get('ajax/pesertas', 'AjaxController@getPesertas')->name('ajax.peserta');
     Route::get('ajax/mahasiswas', 'AjaxController@getMahasiswas')->name('ajax.mahasiswa');
     Route::get('ajax/tims', 'AjaxController@getTims')->name('ajax.tim');
     Route::get('ajax/nilai/{id}/{babak}', 'AjaxController@getNilai')->name('ajax.get-nilai');
@@ -142,6 +145,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
     Route::get('export/penyisihan-2/{kategori}', 'ExportExcelController@exportPenyisihan2')->name('export.penyisihan-2');
     Route::get('export/final/{kategori}', 'ExportExcelController@exportFinal')->name('export.final');
     Route::get('export/tims', 'ExportExcelController@exportTims')->name('export.tims');
+    Route::get('export/pesertas', 'ExportExcelController@exportPesertas')->name('export.pesertas');
     Route::get('export/mahasiswas', 'ExportExcelController@exportMahasiswas')->name('export.mahasiswas');
 });
 

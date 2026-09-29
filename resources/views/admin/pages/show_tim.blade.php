@@ -30,7 +30,7 @@
 
                     <div class="col-md-12">
                         @foreach($tim->pesertas as $peserta)
-                            <a href="{{ route('admin.mahasiswa.show', ['mahasiswa' => $peserta->mahasiswa->nim ]) }}" class="tile col-md-{{ 12/count($tim->pesertas) }}"
+                            <a href="{{ route('admin.peserta.show', ['peserta' => $peserta->mahasiswa->nim ]) }}" class="tile col-md-{{ 12/count($tim->pesertas) }}"
                                style="font-weight: normal; font-size: 14px; margin: 2px; display: inline-block; text-decoration: none">
                                 Nama : {{ $peserta->mahasiswa->nama }} <br>
                                 NIM : {{ $peserta->mahasiswa->nim }} <br>
