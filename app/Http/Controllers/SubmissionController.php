@@ -40,12 +40,20 @@ class SubmissionController extends Controller
             abort(404);
         }
 
+        $customMessages = [
+            'file.required' => 'File pengumpulan wajib diunggah.',
+            'file.max' => 'Ukuran file melebihi batas maksimal 10 MB.',
+            'file.mimes' => 'Format file harus berupa PDF, ZIP, atau RAR.',
+            'judul.required' => 'Judul karya wajib diisi.',
+            'judul.max' => 'Judul karya maksimal 255 karakter.',
+        ];
+
         // Tentukan folder dan proses berdasarkan babak
         if ($tim->babak == 1) {
             $request->validate([
                 'file' => 'required|file|max:11263|mimes:pdf,zip,rar', // max ~10.9MB (< 11MB)
                 'judul' => 'required|string|max:255',
-            ]);
+            ], $customMessages);
 
             $sub = Submission::createSubmissionPenyisihan1(
                 $tim->id,
@@ -77,7 +85,7 @@ class SubmissionController extends Controller
                     'file' => 'required|file|max:11263|mimes:pdf,zip,rar',
                     'judul' => 'required|string|max:255',
                     'link' => 'nullable|string|max:255',
-                ]);
+                ], $customMessages);
 
                 $data = json_encode(['link' => $request->link]);
 
@@ -94,7 +102,7 @@ class SubmissionController extends Controller
             $request->validate([
                 'file' => 'required|file|max:11263|mimes:pdf,zip,rar',
                 'judul' => 'required|string|max:255',
-            ]);
+            ], $customMessages);
 
             $sub = Submission::createSubmissionFinal(
                 $tim->id,
