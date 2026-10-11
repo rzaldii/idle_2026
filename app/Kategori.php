@@ -13,10 +13,16 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Kategori extends Model
 {
+    public $timestamps = false;
+
     /**
      * @var array
      */
-    protected $fillable = ['id_ormawa', 'nama_kategori', 'kategori'];
+    protected $fillable = ['id_ormawa', 'nama_kategori', 'kategori', 'is_open'];
+
+    protected $casts = [
+        'is_open' => 'boolean',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

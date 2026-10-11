@@ -66,6 +66,10 @@ class KompetisiPenyisihan1 extends Controller
             $kategori = Kategori::with('ormawa')->where('kategori', $id_kategori)->first();
         }
 
+        if ($kategori && isset($kategori->is_open) && !$kategori->is_open) {
+            return redirect()->back()->with('error', 'Pendaftaran untuk kompetisi ' . $kategori->nama_kategori . ' sudah ditutup.');
+        }
+
         $mahasiswas = [];
         for ($i = 0; $i < count($request->nama); $i++) {
             $mahasiswas[$i]["nama"] = $request->nama[$i];

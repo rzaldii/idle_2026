@@ -392,9 +392,15 @@
                     </p>
 
                     <div class="kompetisi-actions">
-                        <a href="#form-pendaftaran" class="btn-idle-primary">
-                            <i class="fa fa-edit" style="margin-right: 8px;"></i> Daftar Sekarang
-                        </a>
+                        @if($kategori->is_open ?? true)
+                            <a href="#form-pendaftaran" class="btn-idle-primary">
+                                <i class="fa fa-edit" style="margin-right: 8px;"></i> Daftar Sekarang
+                            </a>
+                        @else
+                            <a href="#form-pendaftaran" class="btn-idle-outline">
+                                <i class="fa fa-lock" style="margin-right: 8px;"></i> Pendaftaran Ditutup
+                            </a>
+                        @endif
                         <a href="https://drive.google.com/drive/folders/13rCnJi1wkMmMkJaWuY4a1f2HDB1fvvcw" target="_blank" class="btn-idle-secondary">
                             <i class="fa fa-file-pdf-o" style="margin-right: 8px;"></i> Unduh Guidebook
                         </a>
@@ -444,6 +450,9 @@
             </div>
 
             <!-- Registration Form -->
+            @if(!($kategori->is_open ?? true))
+                @include('pages.kompetisi.components.pendaftaran_ditutup')
+            @else
             <div id="form-pendaftaran" class="kompetisi-form-container p-4 p-md-5 mb-5">
                 <div class="text-center mb-4">
                     <h2 class="font-display font-weight-bold" style="font-size: 1.65rem; color: var(--color-text-primary); margin-bottom: 6px;">
@@ -579,6 +588,7 @@
                     </div>
                 </form>
             </div>
+            @endif
         </div>
     </section>
 </div>

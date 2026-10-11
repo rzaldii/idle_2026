@@ -346,9 +346,15 @@
                     </p>
 
                     <div class="ctf-actions">
-                        <a href="#form-pendaftaran" class="btn-idle-primary pulse">
-                            <i class="fa fa-flag" style="margin-right: 8px;"></i> Daftar Sekarang
-                        </a>
+                        @if($kategori->is_open ?? true)
+                            <a href="#form-pendaftaran" class="btn-idle-primary pulse">
+                                <i class="fa fa-flag" style="margin-right: 8px;"></i> Daftar Sekarang
+                            </a>
+                        @else
+                            <a href="#form-pendaftaran" class="btn-idle-outline">
+                                <i class="fa fa-lock" style="margin-right: 8px;"></i> Pendaftaran Ditutup
+                            </a>
+                        @endif
                         <!-- Link Rulebook dipertahankan dari versi lama -->
                         <a href="{{ asset('assets/rulebook/ctf.pdf') }}" target="_blank" class="btn-idle-secondary">
                             <i class="fa fa-file-pdf-o" style="margin-right: 8px;"></i> Unduh Rule Book
@@ -388,6 +394,9 @@
                 </div>
             </div>
 
+            @if(!($kategori->is_open ?? true))
+                @include('pages.kompetisi.components.pendaftaran_ditutup')
+            @else
             <div id="form-pendaftaran" class="ctf-form-container p-4 p-md-5 mb-5" data-aos="fade-up" data-aos-duration="850" data-aos-once="true" data-aos-offset="40">
                 <div class="text-center mb-4">
                     <h2 class="font-display font-weight-bold" style="font-size: 1.65rem; color: var(--color-text-primary); margin-bottom: 6px;">
@@ -523,6 +532,7 @@
                     </div>
                 </form>
             </div>
+            @endif
         </div>
     </section>
 </div>

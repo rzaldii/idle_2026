@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Charts\DoughnutChart;
 use Illuminate\Http\Request;
-use App\User;
+use App\Kategori;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -38,8 +39,72 @@ class AdminController extends Controller
         $totalTimChart->labels($dataTotalTim["label"]);
         $totalTimChart->dataset('Total Tim', 'pie', $dataTotalTim["value"])->color($dataTotalTim["color"]);
 
-        return view('admin.pages.dashboard', compact('totalTimChart', 'totalPesertaChart'));
+        $kategorisOrmawa = collect();
+        if (Auth::user() && Auth::user()->id_ormawa) {
+            $kategorisOrmawa = Kategori::where('id_ormawa', Auth::user()->id_ormawa)
+                ->withCount('tims')
+                ->get();
+        }
+
+        return view('admin.pages.dashboard', compact('totalTimChart', 'totalPesertaChart', 'kategorisOrmawa'));
     }
+
+    public function toggleKategoriStatus(Request $request, $id)
+    {
+        $kategori = Kategori::findOrFail($id);
+
+        if (Auth::user()->id_ormawa && $kategori->id_ormawa != Auth::user()->id_ormawa) {
+            if ($request->ajax()) {
+                return response()->json(['success' => false, 'message' => 'Anda tidak memiliki hak akses untuk mengubah status lomba ini.'], 403);
+            }
+            return redirect()->back()->with('error', 'Anda tidak memiliki hak akses untuk mengubah status lomba ini.');
+        }
+
+        $kategori->is_open = !$kategori->is_open;
+        $kategori->save();
+
+        $statusText = $kategori->is_open ? 'dibuka' : 'ditutup';
+        $message = 'Pendaftaran lomba ' . $kategori->nama_kategori . ' berhasil ' . $statusText . '.';
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'is_open' => (bool)$kategori->is_open,
+                'status_text' => $kategori->is_open ? 'Terbuka' : 'Ditutup',
+                'message' => $message,
+            ]);
+        }
+
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function toggleAllKategoriStatus(Request $request)
+    {
+        $user = Auth::user();
+        if (!$user || !$user->id_ormawa) {
+            if ($request->ajax()) {
+                return response()->json(['success' => false, 'message' => 'Ormawa tidak valid.'], 400);
+            }
+            return redirect()->back()->with('error', 'Ormawa tidak valid.');
+        }
+
+        $targetStatus = $request->input('status', 0) == 1 ? 1 : 0;
+        Kategori::where('id_ormawa', $user->id_ormawa)->update(['is_open' => $targetStatus]);
+
+        $statusText = $targetStatus == 1 ? 'dibuka' : 'ditutup';
+        $message = 'Seluruh pendaftaran lomba ormawa berhasil ' . $statusText . '.';
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'is_open' => (bool)$targetStatus,
+                'message' => $message,
+            ]);
+        }
+
+        return redirect()->back()->with('success', $message);
+    }
+
     public function ChangePassword(){
       return view('auth.passwords.change');
     }

@@ -85,6 +85,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
     Route::get('/', 'AdminController@index')->name('dashboard');
     Route::get('chpwd', 'AdminController@ChangePassword')->name('chpwd');
     Route::post('chpwd', 'AdminController@PostPassword')->name('post.chpwd');
+    Route::post('kategori/toggle/{kategori}', 'AdminController@toggleKategoriStatus')->name('kategori.toggle');
+    Route::post('kategori/toggle-all', 'AdminController@toggleAllKategoriStatus')->name('kategori.toggle-all');
 
     Route::resource('peserta', 'PesertaController')->parameters(['peserta' => 'peserta']);
     Route::resource('mahasiswa', 'PesertaController')->parameters(['mahasiswa' => 'peserta']);
