@@ -18,17 +18,20 @@ class ExportExcelController extends Controller
 {
     public function exportPenyisihan1($kategori){
         $nama_kategori = Kategori::findOrFail($kategori)->nama_kategori;
-        return Excel::download(new PesertaExport($kategori), "Peserta Tahap 1 $nama_kategori.xlsx");
+        $safe_nama = str_replace(['/', '\\'], '-', $nama_kategori);
+        return Excel::download(new PesertaExport($kategori), "Peserta Tahap 1 $safe_nama.xlsx");
     }
 
     public function exportPenyisihan2($kategori){
         $nama_kategori = Kategori::findOrFail($kategori)->nama_kategori;
-        return Excel::download(new PesertaExport($kategori, 2), "Peserta Tahap 2 $nama_kategori.xlsx");
+        $safe_nama = str_replace(['/', '\\'], '-', $nama_kategori);
+        return Excel::download(new PesertaExport($kategori, 2), "Peserta Tahap 2 $safe_nama.xlsx");
     }
 
     public function exportFinal($kategori){
         $nama_kategori = Kategori::findOrFail($kategori)->nama_kategori;
-        return Excel::download(new PesertaExport($kategori, 3), "Peserta Final $nama_kategori.xlsx");
+        $safe_nama = str_replace(['/', '\\'], '-', $nama_kategori);
+        return Excel::download(new PesertaExport($kategori, 3), "Peserta Final $safe_nama.xlsx");
     }
 
     public function exportTims(){
@@ -37,7 +40,7 @@ class ExportExcelController extends Controller
 
     public function exportPesertas(){
         $id_ormawa = Auth::user()->id_ormawa ?? null;
-        $nama_ormawa = Auth::user()->name ?? 'Ormawa';
+        $nama_ormawa = str_replace(['/', '\\'], '-', Auth::user()->name ?? 'Ormawa');
         return Excel::download(new OrmawaPesertaExport($id_ormawa), "Daftar Peserta $nama_ormawa IDLe.xlsx");
     }
 
