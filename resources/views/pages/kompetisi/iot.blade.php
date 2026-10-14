@@ -407,9 +407,6 @@
                         <a href="https://docs.google.com/document/d/15Lp-hCiV6nCVvesS3kL8mIPPs4YpwT1HzKLpByfTDPQ/edit?usp=sharing" target="_blank" class="btn-idle-outline">
                             <i class="fa fa-file-text-o" style="margin-right: 8px;"></i> Template Proposal
                         </a>
-                        <a href="{{ route('kompetisi.peserta', ['kategori' => $kategori->kategori]) }}" class="btn-idle-outline" title="Klik untuk melihat daftar tim">
-                            <i class="fa fa-users" style="margin-right: 8px;"></i> {{ $kategori->tims()->count() }} Tim Terdaftar
-                        </a>
                     </div>
                 </div>
 
