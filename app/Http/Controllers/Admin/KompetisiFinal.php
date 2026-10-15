@@ -79,12 +79,21 @@ class KompetisiFinal extends Controller
 
                 $email = trim($peserta->mahasiswa->email);
                 try {
-                    $mailer->send('mails.lolos', compact('tahap', 'tim_', 'kategori', 'nama', 'kode'), function ($message) use ($email, $kategori) {
-                        $message
-                            ->from(config('mail.from.address'), config('mail.from.name'))
-                            ->to($email)
-                            ->subject('Pengumuman Final - ' . $kategori->nama_kategori);
-                    });
+                    if ($kategori->id_ormawa == 2) {
+                        $mailer->send('mails.itec_lolos', compact('tahap', 'tim_', 'kategori', 'nama', 'kode'), function ($message) use ($email) {
+                            $message
+                                ->from(config('mail.from.address'), config('mail.from.name'))
+                                ->to($email)
+                                ->subject('PENGUMUMAN LOLOS BABAK FINAL IDLe 2026');
+                        });
+                    } else {
+                        $mailer->send('mails.lolos', compact('tahap', 'tim_', 'kategori', 'nama', 'kode'), function ($message) use ($email, $kategori) {
+                            $message
+                                ->from(config('mail.from.address'), config('mail.from.name'))
+                                ->to($email)
+                                ->subject('Pengumuman Final - ' . $kategori->nama_kategori);
+                        });
+                    }
                     \Log::info('Email pengumuman final berhasil dikirim ke: ' . $email . ' untuk tim: ' . $nama);
                 } catch (\Exception $e) {
                     \Log::error('Gagal kirim email final untuk peserta ' . $email . ' (tim ' . $nama . '): ' . $e->getMessage());
@@ -93,6 +102,63 @@ class KompetisiFinal extends Controller
         }
 
         return redirect()->route('admin.final.index', $id_kategori)->with('success', 'Berhasil menambahkan peserta final dan mengirim email pengumuman.');
+    }
+
+    public function createGugur($id_kategori)
+    {
+        $kategori = Kategori::where('kategori', $id_kategori)->firstOrFail();
+
+        // Ambil tim babak penyisihan yang belum masuk final (babak != 3)
+        $tims = Tim::where('id_kategori', $kategori->id)
+            ->where('babak', '!=', 3)
+            ->get();
+
+        return view('admin.pages.add_gugur', compact('kategori', 'tims'));
+    }
+
+    public function storeGugur($id_kategori, Request $request)
+    {
+        $tims = $request->tims;
+        if (empty($tims)) {
+            return redirect()->back()->with('error', 'Pilih setidaknya satu tim untuk dikirimi pengumuman tidak lolos.');
+        }
+
+        $kategori = Kategori::where('kategori', $id_kategori)->first();
+        if (!$kategori) {
+            return redirect()->back()->with('error', 'Kategori tidak ditemukan.');
+        }
+
+        $mailer = app()->make(\Snowfire\Beautymail\Beautymail::class);
+
+        foreach ($tims as $tim) {
+            $tim_ = Tim::with('pesertas.mahasiswa')->find($tim);
+            if (!$tim_) {
+                continue;
+            }
+
+            $nama = $tim_->nama_tim;
+
+            foreach ($tim_->pesertas as $peserta) {
+                if (!$peserta->mahasiswa || empty($peserta->mahasiswa->email)) {
+                    continue;
+                }
+
+                $email = trim($peserta->mahasiswa->email);
+                try {
+                    $mailer->send('mails.itec_tidak_lolos', compact('tim_', 'kategori', 'nama'), function ($message) use ($email, $kategori) {
+                        $message
+                            ->from(config('mail.from.address'), config('mail.from.name'))
+                            ->to($email)
+                            ->subject('Pengumuman Hasil Babak Penyisihan - ' . $kategori->nama_kategori . ' | IDLe 2026');
+                    });
+                    \Log::info('Email tidak lolos berhasil dikirim ke: ' . $email . ' untuk tim: ' . $nama);
+                } catch (\Exception $e) {
+                    \Log::error('Gagal kirim email tidak lolos untuk peserta ' . $email . ' (tim ' . $nama . '): ' . $e->getMessage());
+                }
+            }
+        }
+
+        return redirect()->route('admin.final.index', $id_kategori)->with('success', 'Berhasil mengirim email pengumuman belum lolos.');
     }
 
     public function getSetNilaiPages()

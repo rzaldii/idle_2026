@@ -115,6 +115,8 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
         Route::post('final/down/{kategori}/{tim}', 'KompetisiFinal@destroy')->name('final.destroy');
         Route::get('final/create/{kategori}', 'KompetisiFinal@create')->name('final.create');
         Route::post('final/store/{kategori}', 'KompetisiFinal@store')->name('final.store');
+        Route::get('final/gugur/{kategori}', 'KompetisiFinal@createGugur')->name('final.gugur.create');
+        Route::post('final/gugur/{kategori}', 'KompetisiFinal@storeGugur')->name('final.gugur.store');
 //        Route::post('final/update/{kategori}', 'KompetisiFinal@update')->name('final.update');
         Route::get('final/{kategori}', 'KompetisiFinal@index')->name('final.index');
 

@@ -24,6 +24,10 @@
                 <div class="form-group">
                     <a href="{{ route('admin.final.create', ['kategori' => $kategori->kategori ]) }}"
                        class="btn btn-primary"><span class="fa fa-plus"></span>Tambah Peserta Final</a>
+                    @if($kategori->id_ormawa == 2)
+                    <a href="{{ route('admin.final.gugur.create', ['kategori' => $kategori->kategori ]) }}"
+                       class="btn btn-warning"><span class="fa fa-envelope-o"></span> Kirim Pengumuman Tim Tidak Lolos</a>
+                    @endif
                     <a href="{{ route('admin.export.final', ['kategori' => $kategori->id]) }}"
                        class="btn btn-success"><span class="fa fa-file-excel-o"></span>Cetak XLS</a>
                 </div>
