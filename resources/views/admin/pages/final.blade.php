@@ -124,6 +124,17 @@
                         data: 'submission',
                         render: function (data, type, row) {
                             if (data != null) {
+                                if (data['data']) {
+                                    try {
+                                        var extra = JSON.parse(data['data']);
+                                        if (extra && extra.proposal && extra.ppt) {
+                                            return '<div style="display:flex; flex-direction:column; gap:6px;">' +
+                                                '<a href="/admin/ajax/download/' + data['token'] + '/proposal" class="btn btn-sm btn-outline-primary" style="text-align:left; font-size:12px; padding:3px 8px;"><i class="fa fa-file-pdf-o"></i> Unduh Proposal</a>' +
+                                                '<a href="/admin/ajax/download/' + data['token'] + '/ppt" class="btn btn-sm btn-outline-info" style="text-align:left; font-size:12px; padding:3px 8px;"><i class="fa fa-file-powerpoint-o"></i> Unduh PPT</a>' +
+                                                '</div>';
+                                        }
+                                    } catch(e) {}
+                                }
                                 return '<a href="/admin/ajax/download/' + data['token'] + '" class="align-items-center"><i class="fa fa-download" aria-hidden="true"></i> Unduh</a>';
                             } else {
                                 return "Belum Melakukan Submission";

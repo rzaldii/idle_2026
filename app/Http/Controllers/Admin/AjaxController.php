@@ -156,7 +156,7 @@ class AjaxController extends Controller
         return DataTables::of($tims)->make(true);
     }
 
-    public function downloadFile($id)
+    public function downloadFile($id, $type = null)
     {
         $file = Submission::with('tim.kategori')
             ->where('token', $id)
@@ -167,7 +167,18 @@ class AjaxController extends Controller
             return redirect()->back()->with('error', 'File not found');
         }
 
-        $file_path = public_path('uploads/' . $file->file_path);
+        $relative_path = $file->file_path;
+        $label = '';
+
+        if ($type && !empty($file->data)) {
+            $extra = json_decode($file->data, true);
+            if (is_array($extra) && isset($extra[$type])) {
+                $relative_path = $extra[$type];
+                $label = '_' . strtoupper($type);
+            }
+        }
+
+        $file_path = public_path('uploads/' . $relative_path);
 
         if (!file_exists($file_path)) {
             return redirect()->back()->with('error', 'File not found');
@@ -177,7 +188,11 @@ class AjaxController extends Controller
         $extension = pathinfo($file_path, PATHINFO_EXTENSION);
 
         // Gabungkan nama file
-        $name = $file->tim->kategori->nama_kategori . '_' . $file->tim->nama_tim . '_' . $file->judul;
+        $kategoriName = $file->tim->kategori->nama_kategori ?? 'Lomba';
+        $timName = $file->tim->nama_tim ?? 'Tim';
+        $judul = $file->judul ?? 'Final';
+
+        $name = $kategoriName . '_' . $timName . '_' . $judul . $label;
 
         // Replace karakter ilegal dengan underscore
         $name = preg_replace('/[\/\\\:\*\?"<>\|]/', '_', $name);

@@ -20,16 +20,15 @@ class SubmissionController extends Controller
         if ($tim == null) {
             abort(404);
         }
+        $submission = Submission::where('token', $token)->orderBy('created_at', 'desc')->first();
+
         if ($tim->babak == 1) {
-            return view('pages.submission_1', compact('kategoris', 'kategori', 'tim'));
+            return view('pages.submission_1', compact('kategoris', 'kategori', 'tim', 'submission'));
         } elseif ($tim->babak == 2) {
-            return view('pages.submission_2', compact('kategoris', 'kategori', 'tim'));
+            return view('pages.submission_2', compact('kategoris', 'kategori', 'tim', 'submission'));
         } else {
-            return view('pages.submission_3', compact('kategoris', 'kategori', 'tim'));
+            return view('pages.submission_3', compact('kategoris', 'kategori', 'tim', 'submission'));
         }
-        return $tim;
-        return $token;
-        // TODO : return page submit
     }
 
     public function submitFile(Request $request, $token)
@@ -46,6 +45,12 @@ class SubmissionController extends Controller
             'file.mimes' => 'Format file harus berupa PDF, ZIP, atau RAR.',
             'judul.required' => 'Judul karya wajib diisi.',
             'judul.max' => 'Judul karya maksimal 255 karakter.',
+            'file_proposal.required' => 'File Proposal Revisi (PDF) wajib diunggah.',
+            'file_proposal.max' => 'Ukuran file Proposal Revisi melebihi batas maksimal 10 MB.',
+            'file_proposal.mimes' => 'Format file Proposal Revisi harus berupa PDF.',
+            'file_ppt.required' => 'File PPT / Presentasi (PDF) wajib diunggah.',
+            'file_ppt.max' => 'Ukuran file PPT / Presentasi melebihi batas maksimal 10 MB.',
+            'file_ppt.mimes' => 'Format file PPT / Presentasi harus berupa PDF.',
         ];
 
         // Tentukan folder dan proses berdasarkan babak
@@ -99,22 +104,40 @@ class SubmissionController extends Controller
                 );
             }
         } else { // final
-            $request->validate([
-                'file' => 'required|file|max:11263|mimes:pdf,zip,rar',
-                'judul' => 'required|string|max:255',
-            ], $customMessages);
+            if ($tim->kategori && $tim->kategori->id_ormawa == 2) {
+                // Khusus ITeC: 2 file PDF (Proposal Revisi & PPT Presentasi)
+                $request->validate([
+                    'judul' => 'required|string|max:255',
+                    'file_proposal' => 'required|file|max:11263|mimes:pdf',
+                    'file_ppt' => 'required|file|max:11263|mimes:pdf',
+                ], $customMessages);
 
-            $sub = Submission::createSubmissionFinal(
-                $tim->id,
-                $request->judul,
-                "submission-final",
-                $token,
-                $request->file('file')
-            );
+                $sub = Submission::createSubmissionFinalITeC(
+                    $tim->id,
+                    $request->judul,
+                    "submission-final",
+                    $token,
+                    $request->file('file_proposal'),
+                    $request->file('file_ppt')
+                );
+            } else {
+                $request->validate([
+                    'file' => 'required|file|max:11263|mimes:pdf,zip,rar',
+                    'judul' => 'required|string|max:255',
+                ], $customMessages);
+
+                $sub = Submission::createSubmissionFinal(
+                    $tim->id,
+                    $request->judul,
+                    "submission-final",
+                    $token,
+                    $request->file('file')
+                );
+            }
         }
 
         if ($sub) {
-            return redirect('/')->with('success', 'Upload Berhasil');
+            return redirect()->route('kompetisi.submit.index', ['token' => $token])->with('success', 'Upload Berhasil Disimpan');
         } else {
             return redirect()->back()->with('error', 'Upload Gagal');
         }

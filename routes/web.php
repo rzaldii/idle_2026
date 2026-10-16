@@ -130,7 +130,7 @@ Route::group(['namespace' => 'Admin', 'as' => 'admin.', 'prefix' => 'admin', 'mi
     Route::get('ajax/tims', 'AjaxController@getTims')->name('ajax.tim');
     Route::get('ajax/nilai/{id}/{babak}', 'AjaxController@getNilai')->name('ajax.get-nilai');
     Route::post('ajax/nilai', 'AjaxController@setNilai')->name('ajax.set-nilai');
-    Route::get('ajax/download/{path}', 'AjaxController@downloadFile')->name('ajax.download');
+    Route::get('ajax/download/{path}/{type?}', 'AjaxController@downloadFile')->name('ajax.download');
     Route::get('ajax/images', 'AjaxController@getImages')->name('images.ajax');
 
     Route::get('post/', 'PostController@index')->name('post.index');

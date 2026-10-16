@@ -103,6 +103,34 @@ class Submission extends Model
         return $submission;
     }
 
+    public static function createSubmissionFinalITeC($id_tim, $judul, $path, $token, $fileProposal, $filePpt){
+
+        $uploadProposal = ($fileProposal instanceof \Illuminate\Http\UploadedFile)
+            ? Storage::disk('public_uploads')->putFile($path . '/proposal', $fileProposal)
+            : $fileProposal;
+
+        $uploadPpt = ($filePpt instanceof \Illuminate\Http\UploadedFile)
+            ? Storage::disk('public_uploads')->putFile($path . '/ppt', $filePpt)
+            : $filePpt;
+
+        if(!$uploadProposal || !$uploadPpt) {
+            return false;
+        }
+
+        $submission = Submission::create([
+            'id_tim' => $id_tim,
+            'judul' => $judul,
+            'file_path' => $uploadProposal,
+            'data' => json_encode([
+                'proposal' => $uploadProposal,
+                'ppt' => $uploadPpt
+            ]),
+            'token' => $token
+        ]);
+
+        return $submission;
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
